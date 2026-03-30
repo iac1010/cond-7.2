@@ -488,6 +488,15 @@ export type LostAndFound = {
   returnedAt?: string;
 };
 
+export type SystemUser = {
+  id: string;
+  name: string;
+  email: string;
+  role: 'ADMIN' | 'OPERATOR' | 'VIEWER';
+  status: 'ACTIVE' | 'INACTIVE';
+  createdAt: string;
+};
+
 export interface AppState {
   clients: Client[];
   checklistItems: ChecklistItem[];
@@ -524,6 +533,7 @@ export interface AppState {
   keys: KeyControl[];
   classifieds: Classified[];
   lostAndFound: LostAndFound[];
+  users: SystemUser[];
   iotState: IotState;
   companyLogo: string | null;
   companySignature: string | null;
@@ -697,6 +707,10 @@ export interface AppState {
   addLostAndFound: (item: Omit<LostAndFound, 'id' | 'status'>) => void;
   updateLostAndFound: (id: string, item: Partial<LostAndFound>) => void;
   deleteLostAndFound: (id: string) => void;
+
+  addUser: (user: Omit<SystemUser, 'id' | 'createdAt'>) => Promise<void>;
+  updateUser: (id: string, user: Partial<SystemUser>) => Promise<void>;
+  deleteUser: (id: string) => Promise<void>;
 
   updateTicketStatus: (id: string, status: TicketStatus) => void;
   updateQuoteStatus: (id: string, status: Quote['status']) => void;

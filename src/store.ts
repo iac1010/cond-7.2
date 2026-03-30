@@ -64,6 +64,7 @@ export const useStore = create<AppState>()(
       keys: [],
       classifieds: [],
       lostAndFound: [],
+      users: [],
       iotState: {
         pumps: {
           caixa: false,
@@ -140,7 +141,8 @@ export const useStore = create<AppState>()(
             supabase.from('notifications').select('*'),
             supabase.from('savings_goals').select('*'),
             supabase.from('document_templates').select('*'),
-            supabase.from('contracts').select('*')
+            supabase.from('contracts').select('*'),
+            supabase.from('system_users').select('*')
           ]);
 
           const [
@@ -151,7 +153,7 @@ export const useStore = create<AppState>()(
             assembliesRes, noticesRes, packagesRes, visitorsRes, 
             criticalEventsRes, digitalFolderRes, supplyQuotationsRes, 
             companySettingsRes, notificationsRes, savingsGoalsRes, documentTemplatesRes,
-            contractsRes
+            contractsRes, usersRes
           ] = results;
 
           // If company settings don't exist, create a default row
@@ -533,6 +535,17 @@ export const useStore = create<AppState>()(
               fileUrl: c.file_url,
               alertDays: c.alert_days,
               alertEnabled: c.alert_enabled
+            }));
+          }
+
+          if (usersRes?.data) {
+            newState.users = usersRes.data.map(u => ({
+              id: u.id,
+              name: u.name,
+              email: u.email,
+              role: u.role,
+              status: u.status,
+              createdAt: u.created_at
             }));
           }
 
@@ -2564,6 +2577,48 @@ export const useStore = create<AppState>()(
       deleteLostAndFound: (id) => set((state) => ({
         lostAndFound: state.lostAndFound.filter(i => i.id !== id)
       })),
+
+      addUser: async (user) => {
+        const id = uuidv4();
+        const createdAt = new Date().toISOString();
+        const newUser = { ...user, id, createdAt };
+        set((state) => ({ users: [...state.users, newUser] }));
+        if (!isSupabaseConfigured) return;
+        try {
+          await supabase.from('system_users').insert([{
+            id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            status: user.status,
+            created_at: createdAt
+          }]);
+          toast.success('Usuário criado com sucesso!');
+        } catch (e) { console.error(e); }
+      },
+      updateUser: async (id, user) => {
+        set((state) => ({
+          users: state.users.map(u => u.id === id ? { ...u, ...user } : u)
+        }));
+        if (!isSupabaseConfigured) return;
+        try {
+          await supabase.from('system_users').update({
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            status: user.status
+          }).eq('id', id);
+          toast.success('Usuário atualizado com sucesso!');
+        } catch (e) { console.error(e); }
+      },
+      deleteUser: async (id) => {
+        set((state) => ({ users: state.users.filter(u => u.id !== id) }));
+        if (!isSupabaseConfigured) return;
+        try {
+          await supabase.from('system_users').delete().eq('id', id);
+          toast.success('Usuário removido com sucesso!');
+        } catch (e) { console.error(e); }
+      },
 
       updateTicketStatus: (id, status) => {
         const ticket = get().tickets.find(t => t.id === id);

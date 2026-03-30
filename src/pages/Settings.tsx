@@ -2,7 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useStore } from '../store';
 import { CompanyData } from '../types';
 import { toast } from 'react-hot-toast';
-import { Upload, Trash2, Image as ImageIcon, Save, Download, Database, FileUp, ChevronUp, ChevronDown, Layout as LayoutIcon, Settings as SettingsIcon, Eye, EyeOff, MessageSquare } from 'lucide-react';
+import { 
+  Upload, Trash2, Image as ImageIcon, Save, Download, Database, 
+  FileUp, ChevronUp, ChevronDown, Layout as LayoutIcon, 
+  Settings as SettingsIcon, Eye, EyeOff, MessageSquare,
+  Users, UserPlus, Edit2, X, Check, Shield
+} from 'lucide-react';
 import { BackButton } from '../components/BackButton';
 import { ConfirmationModal } from '../components/ConfirmationModal';
 import { motion } from 'framer-motion';
@@ -21,6 +26,7 @@ export default function Settings() {
     suppliers, supplyItems, supplyQuotations, payments, legalAgreements, scheduledMaintenances,
     notifications, consumptionReadings, digitalFolder, notices, packages, visitors,
     criticalEvents, energyData, savingsGoals, assemblies, documentTemplates,
+    users, addUser, updateUser, deleteUser,
     restoreData, logout,
     whatsappEnabled, toggleWhatsApp,
     biaEnabled, toggleBia,
@@ -43,6 +49,16 @@ export default function Settings() {
     onConfirm: () => {},
   });
 
+  const [activeTab, setActiveTab] = useState<'general' | 'users'>('general');
+  const [isUserFormOpen, setIsUserFormOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<any>(null);
+  const [userFormData, setUserFormData] = useState({
+    name: '',
+    email: '',
+    role: 'OPERATOR' as 'ADMIN' | 'OPERATOR' | 'VIEWER',
+    status: 'ACTIVE' as 'ACTIVE' | 'INACTIVE'
+  });
+
   const [formData, setFormData] = useState<CompanyData>({
     name: '',
     document: '',
@@ -51,6 +67,40 @@ export default function Settings() {
     address: '',
     website: ''
   });
+
+  const resetUserForm = () => {
+    setUserFormData({
+      name: '',
+      email: '',
+      role: 'OPERATOR',
+      status: 'ACTIVE'
+    });
+    setEditingUser(null);
+    setIsUserFormOpen(false);
+  };
+
+  const handleUserSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingUser) {
+      await updateUser(editingUser.id, userFormData);
+    } else {
+      await addUser(userFormData);
+    }
+    resetUserForm();
+  };
+
+  const handleEditUser = (user: any) => {
+    setEditingUser(user);
+    setUserFormData({
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      status: user.status
+    });
+    setIsUserFormOpen(true);
+    // Scroll to form
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     if (companyData) {
@@ -130,6 +180,7 @@ export default function Settings() {
       savingsGoals,
       assemblies,
       documentTemplates,
+      users,
       companyLogo,
       companySignature,
       companyData,
@@ -261,13 +312,39 @@ export default function Settings() {
         </div>
       </header>
 
+      <div className="max-w-5xl mx-auto w-full mb-8 flex gap-4 relative z-10">
+        <button
+          onClick={() => setActiveTab('general')}
+          className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${
+            activeTab === 'general' 
+              ? 'bg-white text-[#004a7c] shadow-lg' 
+              : 'bg-white/10 text-white hover:bg-white/20'
+          }`}
+        >
+          <SettingsIcon className="w-5 h-5" /> GERAL
+        </button>
+        <button
+          onClick={() => setActiveTab('users')}
+          className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${
+            activeTab === 'users' 
+              ? 'bg-white text-[#004a7c] shadow-lg' 
+              : 'bg-white/10 text-white hover:bg-white/20'
+          }`}
+        >
+          <Users className="w-5 h-5" /> USUÁRIOS
+        </button>
+      </div>
+
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        key={activeTab}
         className="max-w-5xl mx-auto w-full space-y-8 relative z-10 pb-20"
       >
-        {/* Logo Section */}
+        {activeTab === 'general' ? (
+          <>
+            {/* Logo Section */}
         <motion.div variants={itemVariants} className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl">
           <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 text-zinc-900">
             <ImageIcon className="w-6 h-6 text-blue-600" />
@@ -672,6 +749,186 @@ export default function Settings() {
             <Upload className="w-6 h-6 rotate-90" /> ENCERRAR SESSÃO DO USUÁRIO
           </button>
         </motion.div>
+          </>
+        ) : (
+          <div className="space-y-8">
+            {/* User Form */}
+            {isUserFormOpen && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl"
+              >
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-2xl font-bold flex items-center gap-3 text-zinc-900">
+                    <UserPlus className="w-6 h-6 text-blue-600" />
+                    {editingUser ? 'Editar Usuário' : 'Novo Usuário'}
+                  </h2>
+                  <button onClick={resetUserForm} className="p-2 hover:bg-zinc-200 rounded-full transition-all text-zinc-400">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleUserSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-bold uppercase tracking-wider text-zinc-400 ml-1">Nome Completo</label>
+                      <input 
+                        type="text" 
+                        value={userFormData.name}
+                        onChange={(e) => setUserFormData({...userFormData, name: e.target.value})}
+                        className="w-full bg-white border border-zinc-200 focus:border-blue-500 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 text-lg"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-bold uppercase tracking-wider text-zinc-400 ml-1">E-mail</label>
+                      <input 
+                        type="email" 
+                        value={userFormData.email}
+                        onChange={(e) => setUserFormData({...userFormData, email: e.target.value})}
+                        className="w-full bg-white border border-zinc-200 focus:border-blue-500 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 text-lg"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-bold uppercase tracking-wider text-zinc-400 ml-1">Nível de Acesso</label>
+                      <select 
+                        value={userFormData.role}
+                        onChange={(e) => setUserFormData({...userFormData, role: e.target.value as any})}
+                        className="w-full bg-white border border-zinc-200 focus:border-blue-500 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 text-lg appearance-none"
+                      >
+                        <option value="ADMIN">Administrador</option>
+                        <option value="OPERATOR">Operador</option>
+                        <option value="VIEWER">Visualizador</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-bold uppercase tracking-wider text-zinc-400 ml-1">Status</label>
+                      <select 
+                        value={userFormData.status}
+                        onChange={(e) => setUserFormData({...userFormData, status: e.target.value as any})}
+                        className="w-full bg-white border border-zinc-200 focus:border-blue-500 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 text-lg appearance-none"
+                      >
+                        <option value="ACTIVE">Ativo</option>
+                        <option value="INACTIVE">Inativo</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end gap-4 pt-4">
+                    <button 
+                      type="button"
+                      onClick={resetUserForm}
+                      className="px-8 py-4 rounded-xl font-bold text-zinc-500 hover:bg-zinc-100 transition-all"
+                    >
+                      CANCELAR
+                    </button>
+                    <button 
+                      type="submit"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg"
+                    >
+                      <Save className="w-5 h-5" /> {editingUser ? 'ATUALIZAR' : 'CRIAR USUÁRIO'}
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            )}
+
+            {/* Users List */}
+            <motion.div variants={itemVariants} className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-bold flex items-center gap-3 text-zinc-900">
+                  <Users className="w-6 h-6 text-blue-600" />
+                  Usuários do Sistema
+                </h2>
+                {!isUserFormOpen && (
+                  <button 
+                    onClick={() => setIsUserFormOpen(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-md"
+                  >
+                    <UserPlus className="w-5 h-5" /> NOVO USUÁRIO
+                  </button>
+                )}
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-zinc-200">
+                      <th className="text-left py-4 px-4 text-xs font-bold uppercase tracking-widest text-zinc-400">Usuário</th>
+                      <th className="text-left py-4 px-4 text-xs font-bold uppercase tracking-widest text-zinc-400">Acesso</th>
+                      <th className="text-left py-4 px-4 text-xs font-bold uppercase tracking-widest text-zinc-400">Status</th>
+                      <th className="text-right py-4 px-4 text-xs font-bold uppercase tracking-widest text-zinc-400">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-100">
+                    {users.length === 0 ? (
+                      <tr>
+                        <td colSpan={4} className="py-12 text-center text-zinc-400 italic">
+                          Nenhum usuário cadastrado além do administrador padrão.
+                        </td>
+                      </tr>
+                    ) : (
+                      users.map((user) => (
+                        <tr key={user.id} className="group hover:bg-white transition-all">
+                          <td className="py-4 px-4">
+                            <div className="font-bold text-zinc-900">{user.name}</div>
+                            <div className="text-sm text-zinc-500">{user.email}</div>
+                          </td>
+                          <td className="py-4 px-4">
+                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                              user.role === 'ADMIN' ? 'bg-purple-100 text-purple-700' :
+                              user.role === 'OPERATOR' ? 'bg-blue-100 text-blue-700' :
+                              'bg-zinc-100 text-zinc-700'
+                            }`}>
+                              <Shield className="w-3 h-3" />
+                              {user.role}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4">
+                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                              user.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                            }`}>
+                              <div className={`w-1.5 h-1.5 rounded-full ${user.status === 'ACTIVE' ? 'bg-green-500' : 'bg-red-500'}`} />
+                              {user.status === 'ACTIVE' ? 'ATIVO' : 'INATIVO'}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4 text-right">
+                            <div className="flex justify-end gap-2">
+                              <button 
+                                onClick={() => handleEditUser(user)}
+                                className="p-2 hover:bg-blue-50 text-blue-600 rounded-lg transition-all"
+                                title="Editar"
+                              >
+                                <Edit2 className="w-5 h-5" />
+                              </button>
+                              <button 
+                                onClick={() => {
+                                  setConfirmModal({
+                                    isOpen: true,
+                                    title: 'Remover Usuário',
+                                    message: `Deseja realmente remover o usuário ${user.name}? Esta ação não pode ser desfeita.`,
+                                    onConfirm: () => deleteUser(user.id),
+                                    type: 'danger'
+                                  });
+                                }}
+                                className="p-2 hover:bg-red-50 text-red-600 rounded-lg transition-all"
+                                title="Excluir"
+                              >
+                                <Trash2 className="w-5 h-5" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </motion.div>
 
       <ConfirmationModal
