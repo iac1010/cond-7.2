@@ -98,7 +98,7 @@ export default function Login() {
         </form>
 
         {/* Hint */}
-        <p className="mt-8 text-white/40 text-sm font-medium">Dica: iac / iac2010</p>
+        <p className="mt-8 text-white/40 text-sm font-medium">Dica: iac / 112213</p>
       </motion.div>
 
       {/* Bottom Icons */}

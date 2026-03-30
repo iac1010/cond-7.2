@@ -700,7 +700,7 @@ export const useStore = create<AppState>()(
       },
       
       login: (user, pass) => {
-        if (user === 'iac' && pass === 'iac2010') {
+        if (user === 'iac' && pass === '112213') {
           localStorage.setItem('isAuthenticated', 'true');
           set({ isAuthenticated: true });
           // Ao fazer login, busca os dados do Supabase
