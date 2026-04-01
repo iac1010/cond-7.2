@@ -40,8 +40,8 @@ export const CondfyIaTile: React.FC<CondfyIaTileProps> = ({ isEditMode }) => {
       </div>
       
       <div className="relative z-10 flex flex-col items-center">
-        <span className="text-[0.75rem] font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-indigo-300 drop-shadow-md">CONDFY.IA Web</span>
-        <span className="text-[0.5rem] font-bold text-white/50 tracking-widest mt-1">SISTEMA EXTERNO</span>
+        <span className="text-[0.75rem] font-display font-black uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-indigo-300 drop-shadow-md">CONDFY.IA Web</span>
+        <span className="text-[0.5rem] font-display font-bold text-white/50 tracking-widest mt-1">SISTEMA EXTERNO</span>
       </div>
     </a>
   );

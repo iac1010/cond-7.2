@@ -16,7 +16,7 @@ export const BackupDemoTile: React.FC<BackupDemoTileProps> = ({ isEditMode, setS
       <div className="flex justify-center items-center h-full relative z-10">
         <DatabaseIcon className="w-12 h-12 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-500" />
       </div>
-      <span className="text-[0.625rem] font-bold uppercase tracking-wider relative z-10 drop-shadow-md">Backup / Demo</span>
+      <span className="text-[0.625rem] font-display font-bold uppercase tracking-wider relative z-10 drop-shadow-md">Backup / Demo</span>
     </button>
   );
 };

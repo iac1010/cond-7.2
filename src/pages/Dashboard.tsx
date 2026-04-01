@@ -554,7 +554,7 @@ export default function Dashboard() {
       <header className="mb-4 md:mb-12 flex justify-between items-start relative z-10 gap-2">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-4">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-light tracking-tight text-white shrink-0">Iniciar</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-display font-black tracking-tight text-white shrink-0">Iniciar</h1>
             
             {/* Bia Status Indicator */}
             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border backdrop-blur-md transition-all mt-2 md:mt-4 ${
@@ -565,11 +565,11 @@ export default function Dashboard() {
               <div className={`w-2 h-2 rounded-full animate-pulse ${
                 biaStatus?.status === 'online' ? 'bg-emerald-400' : 'bg-red-400'
               }`} />
-              <span className="text-[0.625rem] font-black uppercase tracking-widest">
+              <span className="text-[0.75rem] font-display font-black uppercase tracking-widest">
                 Bia {biaStatus?.status === 'online' ? 'Online' : 'Offline'}
               </span>
               {biaStatus?.lastWebhookReceived && (
-                <span className="text-[0.5rem] opacity-60 ml-2">
+                <span className="text-[0.625rem] opacity-60 ml-2 font-medium">
                   Último sinal: {new Date(biaStatus.lastWebhookReceived).toLocaleTimeString('pt-BR')}
                 </span>
               )}
@@ -587,15 +587,15 @@ export default function Dashboard() {
           
           {biaStatus?.lastMessageExtracted && (
             <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 mb-2 w-fit animate-pulse">
-              <p className="text-[0.5rem] font-black uppercase tracking-widest text-white/40 mb-1">Bia ouviu agora mesmo:</p>
-              <p className="text-[0.625rem] italic text-emerald-400">"{biaStatus.lastMessageExtracted}"</p>
+              <p className="text-[0.625rem] font-display font-black uppercase tracking-widest text-white/40 mb-1">Bia ouviu agora mesmo:</p>
+              <p className="text-[0.75rem] italic text-emerald-400 font-medium">"{biaStatus.lastMessageExtracted}"</p>
             </div>
           )}
 
           <div className="flex flex-wrap gap-2 items-center">
             <div className="bg-black/40 border border-white/5 rounded-lg px-2 py-1 flex items-center gap-2">
-              <span className="text-[0.5rem] text-white/40 uppercase font-bold">Webhook:</span>
-              <code className="text-[0.5625rem] text-blue-400 font-mono truncate max-w-[150px]">
+              <span className="text-[0.625rem] text-white/40 uppercase font-bold tracking-wider">Webhook:</span>
+              <code className="text-[0.625rem] text-blue-400 font-mono truncate max-w-[150px]">
                 {window.location.origin}/api/webhook/whatsapp
               </code>
               <button 
@@ -613,7 +613,7 @@ export default function Dashboard() {
             <div className="h-4 w-px bg-white/10 mx-1" />
             <button 
               onClick={() => setIsEditMode(!isEditMode)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.625rem] font-black uppercase tracking-widest transition-all w-fit ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.75rem] font-display font-black uppercase tracking-widest transition-all w-fit ${
               isEditMode 
                 ? 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]' 
                 : 'bg-white/10 text-white/60 hover:bg-white/20'
@@ -632,7 +632,7 @@ export default function Dashboard() {
                 toast.error('Erro ao enviar mensagem.', { id: loadingToast });
               }
             }}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.625rem] font-black uppercase tracking-widest transition-all w-fit bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:bg-blue-600"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.625rem] font-display font-black uppercase tracking-widest transition-all w-fit bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:bg-blue-600"
           >
             <Brain className="w-3 h-3" />
             Testar Bia
@@ -654,8 +654,8 @@ export default function Dashboard() {
                 <Database className="w-5 h-5 md:w-8 md:h-8" />
               </div>
             )}
-            <p className="text-sm sm:text-base md:text-xl font-medium text-white truncate">Administrador</p>
-            <p className="text-[0.5rem] md:text-sm text-white/60 font-medium truncate">{companyData?.name || 'CONDFY.IA'}</p>
+            <p className="text-sm sm:text-base md:text-xl font-display font-bold text-white truncate">Administrador</p>
+            <p className="text-[0.625rem] md:text-sm text-white/60 font-medium truncate">{companyData?.name || 'CONDFY.IA'}</p>
             <button 
               onClick={() => {
                 setConfirmModal({
@@ -665,7 +665,7 @@ export default function Dashboard() {
                   onConfirm: logout
                 });
               }}
-              className="mt-1 text-[0.4375rem] md:text-[0.625rem] font-black uppercase tracking-[0.2em] text-red-400 hover:text-red-300 transition-colors flex items-center gap-1 ml-auto group"
+              className="mt-1 text-[0.625rem] md:text-[0.75rem] font-display font-black uppercase tracking-[0.2em] text-red-400 hover:text-red-300 transition-colors flex items-center gap-1 ml-auto group"
             >
               <LogOut className="w-2 h-2 md:w-2.5 md:h-2.5 group-hover:-translate-x-1 transition-transform" />
               Sair
@@ -715,7 +715,7 @@ export default function Dashboard() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl border border-white/10">
             <div className="p-6 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Backup e Sistema</h3>
+              <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white">Backup e Sistema</h3>
               <button onClick={() => setShowBackupModal(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
                 <X className="w-5 h-5" />
               </button>
@@ -723,11 +723,11 @@ export default function Dashboard() {
             <div className="p-6 space-y-4">
               <button 
                 onClick={handleExportBackup}
-                className="w-full p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold flex items-center gap-3 transition-all active:scale-95"
+                className="w-full p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-display font-bold flex items-center gap-3 transition-all active:scale-95"
               >
                 <Download className="w-6 h-6" />
                 <div>
-                  <p className="text-left">Gerar Backup Completo</p>
+                  <p className="text-left font-display">Gerar Backup Completo</p>
                   <p className="text-xs font-normal opacity-70">Baixe todos os dados para outro PC</p>
                 </div>
               </button>
@@ -742,11 +742,11 @@ export default function Dashboard() {
                 />
                 <button 
                   onClick={() => backupInputRef.current?.click()}
-                  className="w-full p-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-gray-900 dark:text-white rounded-2xl font-bold flex items-center gap-3 transition-all active:scale-95"
+                  className="w-full p-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-gray-900 dark:text-white rounded-2xl font-display font-bold flex items-center gap-3 transition-all active:scale-95"
                 >
                   <FileUp className="w-6 h-6" />
                   <div>
-                    <p className="text-left">Restaurar Backup</p>
+                    <p className="text-left font-display">Restaurar Backup</p>
                     <p className="text-xs font-normal opacity-70">Carregar arquivo .json</p>
                   </div>
                 </button>
@@ -771,11 +771,11 @@ export default function Dashboard() {
         <form onSubmit={handleAddMoneyToGoal} className="space-y-6 p-2">
           <div>
             <p className="text-white/60 text-sm mb-4">
-              Meta: <span className="text-white font-bold">{savingsGoals.find(g => g.id === selectedGoalId)?.title}</span>
+              Meta: <span className="text-white font-display font-bold">{savingsGoals.find(g => g.id === selectedGoalId)?.title}</span>
             </p>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor a Adicionar (R$) *</label>
+            <label className="block text-sm font-display font-bold uppercase tracking-wider text-white/60 mb-2">Valor a Adicionar (R$) *</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-display font-bold">R$</span>
               <input 
                 type="number" 
                 value={moneyToAdd || ''}
@@ -803,7 +803,7 @@ export default function Dashboard() {
             </button>
             <button 
               type="submit"
-              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 px-10 py-3 rounded-xl font-display font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               ADICIONAR
             </button>

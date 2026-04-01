@@ -73,15 +73,15 @@ export function WeatherTile() {
           <CloudSun className="w-6 h-6 md:w-10 md:h-10 text-white absolute -bottom-1 -right-1 drop-shadow-lg" />
         </div>
         <div className="min-w-0">
-          <span className="text-3xl md:text-5xl font-light drop-shadow-lg">{data ? `${data.temp}°` : '--°'}</span>
+          <span className="text-3xl md:text-5xl font-display font-light drop-shadow-lg">{data ? `${data.temp}°` : '--°'}</span>
           <div className="mt-0.5 md:mt-1 min-w-0">
-            <p className="text-[0.625rem] md:text-sm font-bold uppercase tracking-wider drop-shadow-md truncate">{data?.city || 'Carregando...'}</p>
-            <p className="text-[0.5rem] md:text-xs opacity-80 drop-shadow-sm truncate">{data?.condition || '...'}</p>
-            {data && <p className="text-[0.5rem] md:text-[0.625rem] opacity-60">{data.high}° / {data.low}°</p>}
+            <p className="text-[0.625rem] md:text-sm font-display font-bold uppercase tracking-wider drop-shadow-md truncate">{data?.city || 'Carregando...'}</p>
+            <p className="text-[0.5rem] md:text-xs font-display opacity-80 drop-shadow-sm truncate">{data?.condition || '...'}</p>
+            {data && <p className="text-[0.5rem] md:text-[0.625rem] font-display opacity-60">{data.high}° / {data.low}°</p>}
           </div>
         </div>
       </div>
-      <span className="text-[0.6875rem] font-bold uppercase tracking-wider relative z-10 drop-shadow-md">Clima</span>
+      <span className="text-[0.6875rem] font-display font-bold uppercase tracking-wider relative z-10 drop-shadow-md">Clima</span>
     </Link>
   );
 }

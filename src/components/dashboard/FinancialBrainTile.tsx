@@ -18,17 +18,17 @@ export function FinancialBrainTile({ isEditMode }: FinancialBrainTileProps) {
           <Brain className="w-10 h-10 text-purple-400" />
         </div>
         <div className="overflow-hidden flex-1">
-          <p className="text-[0.625rem] font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Cérebro Financeiro</p>
+          <p className="text-[0.625rem] font-display font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Cérebro Financeiro</p>
           <div className="space-y-1">
-            <p className="font-black text-xl truncate text-white leading-tight">Inteligência de Dados</p>
+            <p className="font-display font-black text-xl truncate text-white leading-tight">Inteligência de Dados</p>
             <div className="flex items-center gap-2 text-purple-300">
               <Sparkles className="w-4 h-4" />
-              <p className="text-sm font-bold">Insights da Bia Ativos</p>
+              <p className="text-sm font-display font-bold">Insights da Bia Ativos</p>
             </div>
           </div>
         </div>
       </div>
-      <span className="hidden md:block text-[0.6875rem] font-black uppercase tracking-[0.2em] relative z-10 text-white/70 italic">Análise Preditiva</span>
+      <span className="hidden md:block text-[0.6875rem] font-display font-black uppercase tracking-[0.2em] relative z-10 text-white/70 italic">Análise Preditiva</span>
     </div>
   );
 }

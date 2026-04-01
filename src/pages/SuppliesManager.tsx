@@ -235,8 +235,8 @@ export default function SuppliesManager() {
           <div className="flex items-center gap-6">
             <BackButton />
             <div>
-              <h1 className="text-6xl font-light tracking-tight">Insumos</h1>
-              <p className="text-xl opacity-60 mt-2 font-light">Selecione o prédio para gerenciar o estoque</p>
+              <h1 className="text-6xl font-display font-light tracking-tight">Insumos</h1>
+              <p className="text-xl opacity-60 mt-2 font-display font-light">Selecione o prédio para gerenciar o estoque</p>
             </div>
           </div>
 
@@ -273,8 +273,8 @@ export default function SuppliesManager() {
               className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md hover:bg-white/10 transition-all text-left flex items-center justify-between group"
             >
               <div>
-                <h3 className="text-2xl font-bold mb-1">{client.name}</h3>
-                <p className="text-white/40 text-sm">{client.address}</p>
+                <h3 className="text-2xl font-display font-bold mb-1">{client.name}</h3>
+                <p className="text-white/40 text-sm font-display">{client.address}</p>
               </div>
               <ChevronRight className="w-8 h-8 text-white/20 group-hover:text-white transition-colors" />
             </motion.button>
@@ -296,10 +296,10 @@ export default function SuppliesManager() {
         <div className="flex items-center gap-6">
           <BackButton />
           <div>
-            <h1 className="text-6xl font-light tracking-tight">
+            <h1 className="text-6xl font-display font-light tracking-tight">
               {activeTab === 'stock' && selectedClient ? selectedClient.name : 'Insumos'}
             </h1>
-            <p className="text-xl opacity-60 mt-2 font-light">
+            <p className="text-xl opacity-60 mt-2 font-display font-light">
               {activeTab === 'stock' ? 'Controle de estoque por prédio' : 'Controle de fornecedores e cotações'}
             </p>
           </div>
@@ -342,8 +342,8 @@ export default function SuppliesManager() {
                     <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-amber-400">Estoque Crítico</h3>
-                    <p className="text-white/70">{lowStockItems.length} itens estão abaixo do nível mínimo.</p>
+                    <h3 className="text-xl font-display font-bold text-amber-400">Estoque Crítico</h3>
+                    <p className="text-white/70 font-display">{lowStockItems.length} itens estão abaixo do nível mínimo.</p>
                   </div>
                 </div>
                 <button 
@@ -533,8 +533,8 @@ export default function SuppliesManager() {
                         <FileSearch className="w-6 h-6 text-white/60" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold">Cotação #{quotation.id.slice(0, 8)}</h3>
-                        <p className="text-sm text-white/40">{format(new Date(quotation.date), 'dd/MM/yyyy HH:mm')}</p>
+                        <h3 className="text-xl font-display font-bold">Cotação #{quotation.id.slice(0, 8)}</h3>
+                        <p className="text-sm text-white/40 font-display">{format(new Date(quotation.date), 'dd/MM/yyyy HH:mm')}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">

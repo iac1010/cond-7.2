@@ -127,8 +127,8 @@ export default function Residents() {
         <div className="flex items-center gap-4 md:gap-6">
           <BackButton iconSize={6} className="p-3 md:p-4" />
           <div>
-            <h1 className="text-2xl md:text-6xl font-light tracking-tight">Moradores</h1>
-            <p className="text-xs md:text-xl opacity-60 mt-1 md:mt-2 font-light">Gerencie os residentes e unidades</p>
+            <h1 className="text-2xl md:text-6xl font-display font-light tracking-tight">Moradores</h1>
+            <p className="text-xs md:text-xl opacity-60 mt-1 md:mt-2 font-display font-light">Gerencie os residentes e unidades</p>
           </div>
         </div>
         
@@ -208,13 +208,13 @@ export default function Residents() {
               </div>
 
               <div className="mt-4 relative z-10">
-                <h3 className="text-xl md:text-2xl font-bold leading-tight mb-1 line-clamp-2 drop-shadow-lg">{client.name}</h3>
+                <h3 className="text-xl md:text-2xl font-display font-bold leading-tight mb-1 line-clamp-2 drop-shadow-lg">{client.name}</h3>
                 <div className="flex gap-2 mb-2">
                   {client.tower && (
-                    <span className="bg-white/20 px-2 py-0.5 rounded text-[0.625rem] uppercase font-bold tracking-wider">Torre {client.tower}</span>
+                    <span className="bg-white/20 px-2 py-0.5 rounded text-[0.625rem] font-display uppercase font-bold tracking-wider">Torre {client.tower}</span>
                   )}
                   {client.unit && (
-                    <span className="bg-white/20 px-2 py-0.5 rounded text-[0.625rem] uppercase font-bold tracking-wider">Apto {client.unit}</span>
+                    <span className="bg-white/20 px-2 py-0.5 rounded text-[0.625rem] font-display uppercase font-bold tracking-wider">Apto {client.unit}</span>
                   )}
                 </div>
                 {client.contactPerson && (

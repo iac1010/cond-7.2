@@ -21,8 +21,8 @@ export const LockerTile: React.FC<LockerTileProps> = ({ isEditMode, packages }) 
         <Box className="w-12 h-12 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-500" />
       </div>
       <div className="flex flex-col items-center relative z-10">
-        <span className="text-[0.625rem] font-bold uppercase tracking-wider drop-shadow-md">Locker</span>
-        <span className="text-3xl font-light drop-shadow-lg">{pendingPackages.length}</span>
+        <span className="text-[0.625rem] font-display font-bold uppercase tracking-wider drop-shadow-md">Locker</span>
+        <span className="text-3xl font-display font-light drop-shadow-lg">{pendingPackages.length}</span>
       </div>
     </Link>
   );

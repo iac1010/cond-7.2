@@ -28,7 +28,7 @@ export const IncomingMoneyTile: React.FC<IncomingMoneyTileProps> = ({ isEditMode
         <div className="p-1.5 bg-emerald-500/20 rounded-lg border border-emerald-500/20 shadow-sm">
           <TrendingUp className="w-4 h-4 text-emerald-400" />
         </div>
-        <span className="text-[0.625rem] font-black uppercase tracking-[0.2em] text-white/70">Entradas de Dinheiro</span>
+        <span className="text-[0.625rem] font-display font-black uppercase tracking-[0.2em] text-white/70">Entradas de Dinheiro</span>
       </div>
     </div>
   );

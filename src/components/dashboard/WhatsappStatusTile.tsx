@@ -81,7 +81,7 @@ export function WhatsappStatusTile({ biaEnabled, toggleBia, biaOnline, biaStatus
           <div className="p-1.5 bg-emerald-500/20 rounded-lg">
             <MessageSquare className="w-4 h-4 text-emerald-400" />
           </div>
-          <h3 className="text-[0.625rem] font-bold text-white uppercase tracking-wider">Status Bia</h3>
+          <h3 className="text-[0.625rem] font-display font-bold text-white uppercase tracking-wider">Status Bia</h3>
         </div>
         <div className="flex items-center gap-1.5">
           <button 
@@ -104,7 +104,7 @@ export function WhatsappStatusTile({ biaEnabled, toggleBia, biaOnline, biaStatus
         </div>
       </div>
       
-      <div className="flex-1 space-y-1.5 text-[0.5625rem] relative z-10">
+      <div className="flex-1 space-y-1.5 text-[0.5625rem] font-display relative z-10">
         <div className="flex justify-between text-emerald-100/70">
           <span>Webhook URL:</span>
           <span className="text-white font-mono truncate max-w-[100px]" title={`${biaStatus?.appUrl || ''}/api/webhook/whatsapp`}>

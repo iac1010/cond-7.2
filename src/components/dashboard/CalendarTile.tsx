@@ -19,7 +19,7 @@ export function CalendarTile({ isEditMode, nextAppointments }: CalendarTileProps
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-center gap-2 mb-2">
           <CalendarIcon className="w-5 h-5 text-white/70" />
-          <p className="text-[0.625rem] font-black uppercase text-white/50 tracking-[0.2em] truncate">Agenda</p>
+          <p className="text-[0.625rem] font-display font-black uppercase text-white/50 tracking-[0.2em] truncate">Agenda</p>
         </div>
         
         <div className="flex-1 space-y-2 overflow-hidden">
@@ -47,7 +47,7 @@ export function CalendarTile({ isEditMode, nextAppointments }: CalendarTileProps
           )}
         </div>
       </div>
-      <span className="text-[0.6875rem] font-black uppercase tracking-[0.2em] relative z-10 text-white/70 italic">Próximos Eventos</span>
+      <span className="text-[0.6875rem] font-display font-black uppercase tracking-[0.2em] relative z-10 text-white/70 italic">Próximos Eventos</span>
     </Link>
   );
 }

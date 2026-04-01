@@ -143,8 +143,8 @@ export function TicketsMirror({ tickets: allTickets, className = '', showLabel =
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-xl md:text-2xl font-black tracking-tighter">{percentConcluded}%</span>
-                <span className="text-[0.375rem] md:text-[0.4375rem] font-bold uppercase text-white/40 tracking-widest">Concluídas</span>
+                <span className="text-xl md:text-2xl font-display font-black tracking-tighter">{percentConcluded}%</span>
+                <span className="text-[0.375rem] md:text-[0.4375rem] font-display font-bold uppercase text-white/40 tracking-widest">Concluídas</span>
               </div>
             </div>
             <div className="mt-3 md:mt-4 space-y-1.5 md:space-y-2">
@@ -218,18 +218,18 @@ export function TicketsMirror({ tickets: allTickets, className = '', showLabel =
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg font-black">{currentMonthPercent}%</span>
+                  <span className="text-lg font-display font-black">{currentMonthPercent}%</span>
                 </div>
               </div>
               <div className="w-full">
-                <p className="text-[0.4375rem] font-black uppercase text-white/40 mb-0.5">OS no Mês Vigente</p>
-                <p className="text-xl font-black text-white leading-tight">{currentMonthCount}</p>
-                <p className="text-[0.5rem] font-bold text-white/60 uppercase tracking-widest mt-1">
+                <p className="text-[0.4375rem] font-display font-black uppercase text-white/40 mb-0.5">OS no Mês Vigente</p>
+                <p className="text-xl font-display font-black text-white leading-tight">{currentMonthCount}</p>
+                <p className="text-[0.5rem] font-display font-bold text-white/60 uppercase tracking-widest mt-1">
                   {currentMonthConcluded} Concluídas
                 </p>
                 <div className="mt-2 flex items-center justify-center gap-1.5 bg-amber-500/20 px-2 py-0.5 rounded-lg border border-amber-500/30 mx-auto w-fit">
                   <AlertTriangle className="w-2.5 h-2.5 text-amber-400" />
-                  <span className="text-[0.4375rem] font-black text-amber-400 uppercase">
+                  <span className="text-[0.4375rem] font-display font-black text-amber-400 uppercase">
                     {currentMonthTickets.filter(t => t.status !== 'CONCLUIDO').length} Pendentes
                   </span>
                 </div>

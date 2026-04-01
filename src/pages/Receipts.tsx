@@ -219,8 +219,8 @@ export default function Receipts() {
         <div className="flex items-center gap-6">
           <BackButton />
           <div>
-            <h1 className="text-6xl font-light tracking-tight">Recibos</h1>
-            <p className="text-xl opacity-60 mt-2 font-light">Gere e salve recibos profissionais em PDF</p>
+            <h1 className="text-6xl font-display font-light tracking-tight">Recibos</h1>
+            <p className="text-xl opacity-60 mt-2 font-display font-light">Gere e salve recibos profissionais em PDF</p>
           </div>
         </div>
         
@@ -270,7 +270,7 @@ export default function Receipts() {
             <div className="bg-white/10 p-3 rounded-xl">
               <FileCheck className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Dados do Recibo</h2>
+            <h2 className="text-2xl font-display font-bold tracking-tight">Dados do Recibo</h2>
           </div>
           
           <div className="space-y-6">
@@ -406,8 +406,8 @@ export default function Receipts() {
               {/* Value Box */}
               <div className="relative z-10 flex justify-end mb-16">
                 <div className="bg-zinc-900 text-white px-8 py-6 rounded-3xl shadow-2xl shadow-zinc-900/20 flex flex-col items-end">
-                  <p className="text-[0.625rem] font-black text-zinc-400 uppercase tracking-widest mb-1">Valor Total</p>
-                  <p className="text-4xl font-black tracking-tighter">
+                  <p className="text-[0.625rem] font-display font-black text-zinc-400 uppercase tracking-widest mb-1">Valor Total</p>
+                  <p className="text-4xl font-display font-black tracking-tighter">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)}
                   </p>
                 </div>
@@ -497,8 +497,8 @@ export default function Receipts() {
                 <FileText className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold tracking-tight">Recibos Gerados</h2>
-                <p className="text-white/50 text-sm">Histórico de todos os recibos emitidos</p>
+                <h2 className="text-2xl font-display font-bold tracking-tight">Recibos Gerados</h2>
+                <p className="text-white/50 text-sm font-display">Histórico de todos os recibos emitidos</p>
               </div>
             </div>
 

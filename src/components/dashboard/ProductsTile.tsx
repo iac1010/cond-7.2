@@ -19,8 +19,8 @@ export const ProductsTile: React.FC<ProductsTileProps> = ({ isEditMode, products
         <Package className="w-12 h-12 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-500" />
       </div>
       <div className="flex justify-between items-end relative z-10">
-        <span className="text-[0.5rem] sm:text-[0.625rem] font-bold uppercase tracking-wider drop-shadow-md truncate mr-1">Produtos</span>
-        <span className="text-xl sm:text-2xl font-light drop-shadow-lg shrink-0">{productsCount}</span>
+        <span className="text-[0.5rem] sm:text-[0.625rem] font-display font-bold uppercase tracking-wider drop-shadow-md truncate mr-1">Produtos</span>
+        <span className="text-xl sm:text-2xl font-display font-light drop-shadow-lg shrink-0">{productsCount}</span>
       </div>
     </Link>
   );

@@ -307,7 +307,7 @@ export default function Quotes() {
                       <FileText className="w-6 h-6 text-blue-400" />
                     </div>
                     <div>
-                      <h1 className="text-2xl md:text-3xl font-light tracking-wide">
+                      <h1 className="text-2xl md:text-3xl font-display font-light tracking-wide">
                         <span className="font-bold">Gestão de</span> Orçamentos
                       </h1>
                     </div>
@@ -326,8 +326,8 @@ export default function Quotes() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <GlassPanel className="p-6 flex items-center justify-between">
                   <div>
-                    <h3 className="text-white/50 font-bold uppercase tracking-widest text-xs mb-2">Total de Orçamentos</h3>
-                    <span className="text-4xl font-black text-white drop-shadow-lg">{quotes.length}</span>
+                    <h3 className="text-white/50 font-display font-bold uppercase tracking-widest text-xs mb-2">Total de Orçamentos</h3>
+                    <span className="text-4xl font-display font-black text-white drop-shadow-lg">{quotes.length}</span>
                   </div>
                   <div className="p-4 bg-white/5 border border-white/10 rounded-2xl">
                     <FileText className="w-8 h-8 text-white/70" />
@@ -336,8 +336,8 @@ export default function Quotes() {
                 
                 <GlassPanel className="p-6 flex items-center justify-between">
                   <div>
-                    <h3 className="text-white/50 font-bold uppercase tracking-widest text-xs mb-2">Aprovados</h3>
-                    <span className="text-4xl font-black text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">{approvedQuotes.length}</span>
+                    <h3 className="text-white/50 font-display font-bold uppercase tracking-widest text-xs mb-2">Aprovados</h3>
+                    <span className="text-4xl font-display font-black text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]">{approvedQuotes.length}</span>
                   </div>
                   <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
                     <CheckCircle className="w-8 h-8 text-emerald-400" />
@@ -346,8 +346,8 @@ export default function Quotes() {
                 
                 <GlassPanel className="p-6 flex items-center justify-between">
                   <div>
-                    <h3 className="text-white/50 font-bold uppercase tracking-widest text-xs mb-2">Aguardando</h3>
-                    <span className="text-4xl font-black text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.5)]">{pendingQuotes.length}</span>
+                    <h3 className="text-white/50 font-display font-bold uppercase tracking-widest text-xs mb-2">Aguardando</h3>
+                    <span className="text-4xl font-display font-black text-orange-400 drop-shadow-[0_0_10px_rgba(251,146,60,0.5)]">{pendingQuotes.length}</span>
                   </div>
                   <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-2xl">
                     <Clock className="w-8 h-8 text-orange-400" />
@@ -383,11 +383,11 @@ export default function Quotes() {
                             {safeFormatDate(quote.date)}
                           </span>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-1 line-clamp-1" title={client?.name || 'Cliente Desconhecido'}>
+                        <h3 className="text-xl font-display font-bold text-white mb-1 line-clamp-1" title={client?.name || 'Cliente Desconhecido'}>
                           {client?.name || 'Cliente Desconhecido'}
                         </h3>
                         <p className="text-xs text-white/40 mb-4 font-mono">#{quote.id.substring(0, 8)}</p>
-                        <p className="text-3xl font-black text-white tracking-tighter drop-shadow-md">
+                        <p className="text-3xl font-display font-black text-white tracking-tighter drop-shadow-md">
                           {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(quote.totalValue)}
                         </p>
                       </div>

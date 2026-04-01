@@ -32,15 +32,15 @@ export const KanbanTile: React.FC<KanbanTileProps> = ({ isEditMode, tickets }) =
             <Columns className="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-[0.5rem] md:text-[0.625rem] font-black uppercase tracking-[0.2em] drop-shadow-md truncate">Kanban</span>
+            <span className="text-[0.5rem] md:text-[0.625rem] font-display font-black uppercase tracking-[0.2em] drop-shadow-md truncate">Kanban</span>
             <div className="flex items-center gap-1">
               <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-              <span className="text-[0.375rem] md:text-[0.5rem] font-bold text-white/50 uppercase tracking-widest truncate">Mirror Live</span>
+              <span className="text-[0.375rem] md:text-[0.5rem] font-display font-bold text-white/50 uppercase tracking-widest truncate">Mirror Live</span>
             </div>
           </div>
         </div>
         <div className="flex items-center gap-1 md:gap-2 bg-black/20 px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-white/10 backdrop-blur-md shrink-0">
-          <span className="text-sm md:text-xl font-black drop-shadow-lg">{tickets.filter(t => t.type !== 'TAREFA').length}</span>
+          <span className="text-sm md:text-xl font-display font-black drop-shadow-lg">{tickets.filter(t => t.type !== 'TAREFA').length}</span>
         </div>
       </div>
     </Link>

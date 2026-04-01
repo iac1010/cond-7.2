@@ -22,17 +22,17 @@ export const LostAndFoundTile: React.FC<LostAndFoundTileProps> = ({ isEditMode, 
           <Search className="w-10 h-10 text-white" />
         </div>
         <div className="overflow-hidden flex-1">
-          <p className="text-[0.625rem] font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Achados e Perdidos</p>
+          <p className="text-[0.625rem] font-display font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Achados e Perdidos</p>
           <div className="space-y-1">
-            <p className="font-black text-xl truncate text-white leading-tight">Itens Encontrados</p>
+            <p className="font-display font-black text-xl truncate text-white leading-tight">Itens Encontrados</p>
             <div className="flex items-center gap-2 text-white/80">
               <AlertCircle className="w-4 h-4 text-white" />
-              <p className="text-sm font-bold text-white">{foundItems} Aguardando Retirada</p>
+              <p className="text-sm font-display font-bold text-white">{foundItems} Aguardando Retirada</p>
             </div>
           </div>
         </div>
       </div>
-      <span className="text-[0.6875rem] font-black uppercase tracking-[0.2em] relative z-10 text-white/70">Portaria</span>
+      <span className="text-[0.6875rem] font-display font-black uppercase tracking-[0.2em] relative z-10 text-white/70">Portaria</span>
     </Link>
   );
 };

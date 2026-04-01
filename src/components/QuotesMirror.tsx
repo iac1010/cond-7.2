@@ -28,7 +28,7 @@ export function QuotesMirror({ quotes, clients, className = '', showLabel = true
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <FileText className="w-4 h-4 text-white/70" />
-            <span className="text-[0.625rem] font-black uppercase tracking-[0.2em] text-white/70">Orçamentos</span>
+            <span className="text-[0.625rem] font-display font-black uppercase tracking-[0.2em] text-white/70">Orçamentos</span>
           </div>
           <div className="flex gap-2">
             <div className="flex items-center gap-1">
@@ -63,7 +63,7 @@ export function QuotesMirror({ quotes, clients, className = '', showLabel = true
                 <p className="text-[0.625rem] font-bold text-white/80 truncate group-hover:text-white transition-colors">
                   {getClientName(quote.clientId)}
                 </p>
-                <p className="text-[0.5rem] font-medium text-white/40">
+                <p className="text-[0.5rem] font-display font-medium text-white/40">
                   {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(quote.totalValue)}
                 </p>
               </div>

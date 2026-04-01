@@ -111,7 +111,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Database className="w-4 h-4" />
                 </div>
               )}
-              <span className="text-xl font-bold group-hover:text-primary transition-colors">
+              <span className="text-xl font-display font-black group-hover:text-primary transition-colors">
                 Dashboard
               </span>
             </Link>
@@ -119,8 +119,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           
           <div className="flex items-center gap-4">
             <div className="text-right hidden md:block mr-4">
-              <div className="text-sm font-medium">{time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">{time.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' })}</div>
+              <div className="text-sm font-display font-bold">{time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</div>
+              <div className="text-[0.625rem] text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">{time.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' })}</div>
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">

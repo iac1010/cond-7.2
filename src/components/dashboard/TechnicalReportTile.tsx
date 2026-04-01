@@ -21,8 +21,8 @@ export function TechnicalReportTile({ isEditMode }: TechnicalReportTileProps) {
         </div>
       </div>
       <div className="flex flex-col items-start relative z-10">
-        <span className="text-[0.625rem] font-black uppercase tracking-widest text-indigo-200 drop-shadow-md">Criar Relatório</span>
-        <span className="text-[0.5rem] text-indigo-400/80 font-bold uppercase tracking-wider mt-0.5">Com Inteligência Artificial</span>
+        <span className="text-[0.625rem] font-display font-black uppercase tracking-widest text-indigo-200 drop-shadow-md">Criar Relatório</span>
+        <span className="text-[0.5rem] font-display text-indigo-400/80 font-bold uppercase tracking-wider mt-0.5">Com Inteligência Artificial</span>
       </div>
     </Link>
   );

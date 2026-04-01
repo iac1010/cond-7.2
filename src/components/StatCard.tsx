@@ -39,11 +39,11 @@ export function StatCard({ title, value, icon: Icon, color, subtitle }: StatCard
         <Icon className="w-7 h-7 text-white" />
       </div>
       <div>
-        <p className="text-4xl font-black text-zinc-900 tracking-tighter mb-1">{value}</p>
+        <p className="text-4xl font-display font-black text-zinc-900 tracking-tighter mb-1">{value}</p>
         <p className="text-sm text-zinc-500 font-bold leading-tight">{title}</p>
         {subtitle && (
-          <p className={`text-[0.625rem] font-black uppercase tracking-widest ${subtitleColorStyles[color]} mt-3 flex items-center gap-1`}>
-            <span className="w-1 h-1 rounded-full bg-current"></span>
+          <p className={`text-[0.75rem] font-black uppercase tracking-widest ${subtitleColorStyles[color]} mt-3 flex items-center gap-1.5`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-current shadow-sm shadow-current/30"></span>
             {subtitle}
           </p>
         )}

@@ -141,11 +141,11 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-3xl font-black text-white tracking-tight flex items-center gap-3">
+              <h1 className="text-3xl font-display font-black text-white tracking-tight flex items-center gap-3">
                 <Cpu className="w-8 h-8 text-indigo-400" />
                 Gerador de Relatório Técnico
               </h1>
-              <p className="text-white/40 text-sm mt-1">Transforme anotações simples em relatórios profissionais com IA</p>
+              <p className="text-white/40 text-sm mt-1 font-display">Transforme anotações simples em relatórios profissionais com IA</p>
             </div>
           </div>
         </motion.header>
@@ -164,7 +164,7 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                 <div className="flex p-1 bg-white/5 rounded-xl border border-white/10">
                   <button
                     onClick={() => setActiveTab('name')}
-                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-display font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                       activeTab === 'name' 
                         ? 'bg-indigo-500 text-white shadow-lg' 
                         : 'text-white/50 hover:text-white hover:bg-white/5'
@@ -178,7 +178,7 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                       setActiveTab('standard');
                       setReportType('standard');
                     }}
-                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-display font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                       activeTab === 'standard' 
                         ? 'bg-indigo-500 text-white shadow-lg' 
                         : 'text-white/50 hover:text-white hover:bg-white/5'
@@ -192,7 +192,7 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                       setActiveTab('client');
                       setReportType('client');
                     }}
-                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
+                    className={`flex-1 py-2.5 px-4 rounded-lg text-[0.625rem] font-display font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                       activeTab === 'client' 
                         ? 'bg-indigo-500 text-white shadow-lg' 
                         : 'text-white/50 hover:text-white hover:bg-white/5'
@@ -207,7 +207,7 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                 <div className="space-y-6">
                   {activeTab === 'name' && (
                     <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <label className="text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
+                      <label className="text-xs font-display font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
                         <FileText className="w-4 h-4" />
                         Nome do Relatório
                       </label>
@@ -216,13 +216,13 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                         value={reportName}
                         onChange={(e) => setReportName(e.target.value)}
                         placeholder="Ex: Relatório de Manutenção Preventiva"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:ring-2 focus:ring-indigo-500/50"
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 font-display"
                       />
-                      <p className="text-[0.625rem] text-white/30 italic">Este nome será usado no cabeçalho do PDF e no nome do arquivo.</p>
+                      <p className="text-[0.625rem] text-white/30 italic font-display">Este nome será usado no cabeçalho do PDF e no nome do arquivo.</p>
                       
                       <button
                         onClick={() => setActiveTab('standard')}
-                        className="w-full mt-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
+                        className="w-full mt-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all text-xs font-display font-bold uppercase tracking-widest flex items-center justify-center gap-2"
                       >
                         Próximo Passo
                         <ArrowLeft className="w-4 h-4 rotate-180" />
@@ -235,14 +235,14 @@ Gere apenas o relatório em formato Markdown, sem introduções ou explicações
                       {/* Client Selector */}
                       {activeTab === 'client' && (
                         <div className="space-y-2">
-                          <label className="text-xs font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
+                          <label className="text-xs font-display font-bold text-white/50 uppercase tracking-widest flex items-center gap-2">
                             <Building2 className="w-4 h-4" />
                             Selecione o Cliente
                           </label>
                           <select
                             value={selectedClientId}
                             onChange={(e) => setSelectedClientId(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 appearance-none"
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 appearance-none font-display"
                           >
                             <option value="" className="bg-zinc-900">Selecione um cliente...</option>
                             {clients.map(client => (

@@ -639,8 +639,8 @@ export default function Financial() {
                 <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
                 <span className="text-[0.625rem] font-black uppercase tracking-[0.4em] text-cyan-400/60">Live Financial Intelligence</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white leading-none">Financeiro</h1>
-              <p className="text-sm text-white/40 mt-2 font-light max-w-md leading-relaxed">Análise preditiva e controle de fluxo de caixa em tempo real.</p>
+              <h1 className="text-4xl md:text-5xl font-display font-black tracking-tighter text-white leading-none">Financeiro</h1>
+              <p className="text-sm text-white/40 mt-2 font-display font-light max-w-md leading-relaxed">Análise preditiva e controle de fluxo de caixa em tempo real.</p>
             </div>
           </div>
 
@@ -741,12 +741,12 @@ export default function Financial() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-cyan-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Receitas Totais</h3>
+            <h3 className="text-white/30 font-display font-black uppercase tracking-[0.2em] text-[0.625rem]">Receitas Totais</h3>
             <div className="p-2 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black text-white tracking-tighter mb-2">
+          <p className="text-2xl font-display font-black text-white tracking-tighter mb-2">
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalIncome)}
           </p>
           <div className="flex items-center gap-2 text-cyan-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
@@ -763,12 +763,12 @@ export default function Financial() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-rose-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Despesas Totais</h3>
+            <h3 className="text-white/30 font-display font-black uppercase tracking-[0.2em] text-[0.625rem]">Despesas Totais</h3>
             <div className="p-2 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
               <TrendingDown className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black text-white tracking-tighter mb-2">
+          <p className="text-2xl font-display font-black text-white tracking-tighter mb-2">
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalCosts)}
           </p>
           <div className="flex items-center gap-2 text-rose-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
@@ -785,12 +785,12 @@ export default function Financial() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Saldo Líquido</h3>
+            <h3 className="text-white/30 font-display font-black uppercase tracking-[0.2em] text-[0.625rem]">Saldo Líquido</h3>
             <div className={`p-2 rounded-xl border ${balance >= 0 ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-orange-500/10 text-orange-400 border-orange-500/20'}`}>
               <Wallet className="w-4 h-4" />
             </div>
           </div>
-          <p className={`text-2xl font-black tracking-tighter mb-2 ${balance >= 0 ? 'text-white' : 'text-orange-400'}`}>
+          <p className={`text-2xl font-display font-black tracking-tighter mb-2 ${balance >= 0 ? 'text-white' : 'text-orange-400'}`}>
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(balance)}
           </p>
           <div className="flex items-center gap-2 text-white/20 text-[0.5rem] font-bold uppercase tracking-widest">

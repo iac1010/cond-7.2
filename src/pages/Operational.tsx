@@ -188,8 +188,8 @@ export default function Operational() {
               {member.name.charAt(0)}
             </div>
             <div>
-              <h3 className="text-xl font-bold">{member.name}</h3>
-              <p className="text-sm text-white/40">{member.role}</p>
+              <h3 className="text-xl font-display font-bold">{member.name}</h3>
+              <p className="text-sm text-white/40 font-display">{member.role}</p>
             </div>
           </div>
 
@@ -247,8 +247,8 @@ export default function Operational() {
               <Key className="w-6 h-6 text-white/60" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">{key.keyName}</h3>
-              <p className="text-sm text-white/40">{key.location}</p>
+              <h3 className="text-lg font-display font-bold">{key.keyName}</h3>
+              <p className="text-sm text-white/40 font-display">{key.location}</p>
             </div>
           </div>
 
@@ -334,8 +334,8 @@ export default function Operational() {
         <div className="flex items-center gap-6">
           <BackButton iconSize={6} className="p-4" />
           <div>
-            <h1 className="text-4xl md:text-6xl font-light tracking-tight">Operacional</h1>
-            <p className="text-xl opacity-60 mt-2 font-light">Gestão de infraestrutura e equipe</p>
+            <h1 className="text-4xl md:text-6xl font-display font-light tracking-tight">Operacional</h1>
+            <p className="text-xl opacity-60 mt-2 font-display font-light">Gestão de infraestrutura e equipe</p>
           </div>
         </div>
         

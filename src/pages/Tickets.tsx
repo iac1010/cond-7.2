@@ -61,8 +61,8 @@ export default function Tickets() {
         <div className="flex items-center gap-4 md:gap-6">
           <BackButton iconSize={6} className="p-3 md:p-4" />
           <div>
-            <h1 className="text-2xl md:text-6xl font-light tracking-tight text-white">Ordens de Serviço</h1>
-            <p className="text-xs md:text-xl opacity-60 mt-1 md:mt-2 font-light text-white">Gerencie as manutenções e atendimentos</p>
+            <h1 className="text-2xl md:text-6xl font-display font-light tracking-tight text-white">Ordens de OS</h1>
+            <p className="text-xs md:text-xl opacity-60 mt-1 md:mt-2 font-display font-light text-white">Gerencie as manutenções e atendimentos</p>
           </div>
         </div>
         
@@ -126,15 +126,15 @@ export default function Tickets() {
                       <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mb-4 border border-white/10">
                         <Wrench className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-base md:text-lg font-black text-white leading-tight mb-1 line-clamp-2 uppercase tracking-tight">
+                      <h3 className="text-base md:text-lg font-display font-black text-white leading-tight mb-1 line-clamp-2 uppercase tracking-tight">
                         {ticket.title || `Manutenção ${ticket.type}`}
                       </h3>
                       <div className="flex items-center gap-2">
-                        <span className="text-[0.5625rem] text-white/50 font-black uppercase tracking-widest flex items-center gap-1">
+                        <span className="text-[0.5625rem] text-white/50 font-display font-black uppercase tracking-widest flex items-center gap-1">
                           <Tag className="w-2.5 h-2.5" /> {ticket.osNumber || 'S/N'}
                         </span>
                         <span className="w-1 h-1 rounded-full bg-white/20" />
-                        <span className="text-[0.5625rem] text-white/50 font-black uppercase tracking-widest">
+                        <span className="text-[0.5625rem] text-white/50 font-display font-black uppercase tracking-widest">
                           {ticket.type}
                         </span>
                       </div>
@@ -148,10 +148,10 @@ export default function Tickets() {
                     <div className="pt-3 border-t border-white/10 relative z-10">
                       <div className="flex items-end justify-between">
                         <div>
-                          <p className="text-[0.4375rem] font-black text-white/30 uppercase tracking-[0.2em] mb-0.5">
+                          <p className="text-[0.4375rem] font-display font-black text-white/30 uppercase tracking-[0.2em] mb-0.5">
                             Status Atual
                           </p>
-                          <p className="text-lg font-black text-white truncate uppercase tracking-tighter">
+                          <p className="text-lg font-display font-black text-white truncate uppercase tracking-tighter">
                             {ticket.status.replace('_', ' ')}
                           </p>
                         </div>

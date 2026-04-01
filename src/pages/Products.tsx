@@ -122,8 +122,8 @@ export default function Products() {
         <div className="flex items-center gap-6">
           <BackButton />
           <div>
-            <h1 className="text-6xl font-light tracking-tight">Produtos</h1>
-            <p className="text-xl opacity-60 mt-2 font-light">Gerencie seu catálogo de produtos e serviços</p>
+            <h1 className="text-6xl font-display font-light tracking-tight">Produtos</h1>
+            <p className="text-xl opacity-60 mt-2 font-display font-light">Gerencie seu catálogo de produtos e serviços</p>
           </div>
         </div>
         
@@ -210,9 +210,9 @@ export default function Products() {
               </div>
 
               <div className="mt-4 relative z-10">
-                <h3 className="text-2xl font-bold leading-tight mb-1 line-clamp-2 drop-shadow-lg">{product.name}</h3>
+                <h3 className="text-2xl font-display font-bold leading-tight mb-1 line-clamp-2 drop-shadow-lg">{product.name}</h3>
                 {product.code && (
-                  <p className="text-sm opacity-80 flex items-center gap-1 drop-shadow-md">
+                  <p className="text-sm opacity-80 flex items-center gap-1 font-display drop-shadow-md">
                     <Tag className="w-3 h-3" /> Cód: {product.code}
                   </p>
                 )}
@@ -220,8 +220,8 @@ export default function Products() {
 
               <div className="mt-auto pt-4 border-t border-white/10 relative z-10 flex justify-between items-end">
                 <div>
-                  <p className="text-xs uppercase tracking-wider opacity-60 mb-1">Preço ({product.unit || 'UN'})</p>
-                  <p className="text-3xl font-black drop-shadow-lg">
+                  <p className="text-xs uppercase tracking-wider opacity-60 mb-1 font-display">Preço ({product.unit || 'UN'})</p>
+                  <p className="text-3xl font-display font-black drop-shadow-lg">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}
                   </p>
                 </div>

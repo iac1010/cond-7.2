@@ -102,7 +102,7 @@ const CustomToolbar = (toolbar: any) => {
         </button>
       </div>
 
-      <div className="text-3xl font-light text-white lowercase tracking-tight">
+      <div className="text-3xl font-display font-light text-white lowercase tracking-tight">
         {toolbar.label}
       </div>
 
@@ -272,8 +272,8 @@ export default function Calendar() {
                 <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]" />
                 <span className="text-[0.625rem] font-black uppercase tracking-[0.4em] text-blue-400/60">Intelligent Scheduling</span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-white leading-none">Agenda</h1>
-              <p className="text-lg text-white/40 mt-3 font-light max-w-md leading-relaxed">Compromissos e Ordens de Serviço sincronizados em tempo real.</p>
+              <h1 className="text-5xl md:text-6xl font-display font-black tracking-tighter text-white leading-none">Agenda</h1>
+              <p className="text-lg text-white/40 mt-3 font-display font-light max-w-md leading-relaxed">Compromissos e Ordens de Serviço sincronizados em tempo real.</p>
             </div>
           </div>
           
@@ -286,7 +286,7 @@ export default function Calendar() {
               setIsAdding(true);
               setSelectedEvent(null);
             }}
-            className="bg-white/10 hover:bg-white/20 text-white px-10 py-5 flex items-center gap-3 border border-white/20 backdrop-blur-md transition-all rounded-2xl shadow-2xl font-black tracking-widest uppercase text-xs"
+            className="bg-white/10 hover:bg-white/20 text-white px-10 py-5 flex items-center gap-3 border border-white/20 backdrop-blur-md transition-all rounded-2xl shadow-2xl font-display font-black tracking-widest uppercase text-xs"
           >
             <Plus className="w-6 h-6" /> 
             Novo Compromisso
@@ -299,7 +299,7 @@ export default function Calendar() {
           className="flex-1 min-h-[700px] relative z-10 flex flex-col"
         >
         <style>{`
-          .rbc-calendar { font-family: 'Inter', system-ui, sans-serif; border: none; color: white; }
+          .rbc-calendar { font-family: var(--font-display); border: none; color: white; }
           .rbc-month-view, .rbc-time-view, .rbc-header { border: none !important; }
           .rbc-month-view { 
             background: rgba(255, 255, 255, 0.03) !important; 

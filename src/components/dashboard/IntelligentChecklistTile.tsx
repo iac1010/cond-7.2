@@ -20,9 +20,9 @@ export const IntelligentChecklistTile: React.FC<IntelligentChecklistTileProps> =
           <ClipboardCheck className="w-6 h-6 md:w-10 md:h-10 text-white" />
         </div>
         <div className="overflow-hidden flex-1">
-          <p className="text-[0.5rem] md:text-[0.625rem] font-black uppercase text-white/70 mb-0.5 md:mb-1 tracking-[0.2em] truncate">Manutenção Preventiva</p>
+          <p className="text-[0.5rem] md:text-[0.625rem] font-display font-black uppercase text-white/70 mb-0.5 md:mb-1 tracking-[0.2em] truncate">Manutenção Preventiva</p>
           <div className="space-y-0.5 md:space-y-1">
-            <p className="font-black text-xs md:text-xl truncate text-white leading-tight">Manutenção preventiva</p>
+            <p className="font-display font-black text-xs md:text-xl truncate text-white leading-tight">Manutenção preventiva</p>
             <div className="flex items-center gap-1.5 md:gap-2">
               <div className="flex-1 h-1 md:h-1.5 bg-white/20 rounded-full overflow-hidden max-w-[60px] md:max-w-[100px]">
                 <div 
@@ -30,7 +30,7 @@ export const IntelligentChecklistTile: React.FC<IntelligentChecklistTileProps> =
                   style={{ width: overdueMaintenances > 0 ? '40%' : '100%' }}
                 />
               </div>
-              <p className={`text-[0.5rem] md:text-xs font-bold ${overdueMaintenances > 0 ? 'text-amber-400' : 'text-emerald-400'} truncate`}>
+              <p className={`text-[0.5rem] md:text-xs font-display font-bold ${overdueMaintenances > 0 ? 'text-amber-400' : 'text-emerald-400'} truncate`}>
                 {overdueMaintenances > 0 ? `${overdueMaintenances} pendentes` : '100% em dia'}
               </p>
             </div>
@@ -38,10 +38,10 @@ export const IntelligentChecklistTile: React.FC<IntelligentChecklistTileProps> =
         </div>
       </div>
       <div className="flex justify-between items-end relative z-10">
-        <span className="hidden md:block text-[0.6875rem] font-black uppercase tracking-[0.2em] text-white/70">Manutenção Preventiva</span>
+        <span className="hidden md:block text-[0.6875rem] font-display font-black uppercase tracking-[0.2em] text-white/70">Manutenção Preventiva</span>
         <div className="flex items-center gap-1 md:gap-2 bg-white/10 px-1.5 md:px-2 py-0.5 md:py-1 rounded-lg border border-white/10 shrink-0">
           <ShieldCheck className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
-          <span className="text-[0.4375rem] md:text-[0.5625rem] font-bold uppercase tracking-tight text-white/70">Conformidade Legal</span>
+          <span className="text-[0.4375rem] md:text-[0.5625rem] font-display font-bold uppercase tracking-tight text-white/70">Conformidade Legal</span>
         </div>
       </div>
     </Link>

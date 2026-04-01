@@ -19,17 +19,17 @@ export const PresentationTile: React.FC<PresentationTileProps> = ({ isEditMode }
           <Presentation className="w-10 h-10 text-white" />
         </div>
         <div className="overflow-hidden flex-1">
-          <p className="text-[0.625rem] font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Apresentação</p>
+          <p className="text-[0.625rem] font-display font-black uppercase text-white/70 mb-1 tracking-[0.2em]">Apresentação</p>
           <div className="space-y-1">
-            <p className="font-black text-xl truncate text-white leading-tight">Conheça o Sistema</p>
+            <p className="font-display font-black text-xl truncate text-white leading-tight">Conheça o Sistema</p>
             <div className="flex items-center gap-2 text-white/80">
               <Maximize2 className="w-4 h-4 text-yellow-300" />
-              <p className="text-sm font-bold text-white">Tour Interativo 19.0</p>
+              <p className="text-sm font-display font-bold text-white">Tour Interativo 19.0</p>
             </div>
           </div>
         </div>
       </div>
-      <span className="text-[0.6875rem] font-black uppercase tracking-[0.2em] relative z-10 text-white/70">Experiência Completa</span>
+      <span className="text-[0.6875rem] font-display font-black uppercase tracking-[0.2em] relative z-10 text-white/70">Experiência Completa</span>
     </Link>
   );
 };

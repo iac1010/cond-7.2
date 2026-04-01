@@ -37,7 +37,7 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = 'md', glass
     <div className="fixed inset-0 bg-zinc-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className={`${bgClass} rounded-2xl shadow-2xl w-full ${maxWidthClasses[maxWidth]} overflow-hidden flex flex-col max-h-[90vh] border transition-all animate-in fade-in zoom-in duration-200`}>
         <div className={`flex justify-between items-center p-8 border-b ${glass ? 'border-white/10' : 'border-zinc-50 dark:border-zinc-800'} shrink-0`}>
-          <h2 className={`text-2xl font-black tracking-tight ${titleClass}`}>
+          <h2 className={`text-2xl font-display font-black tracking-tight ${titleClass}`}>
             {title}
           </h2>
           <button onClick={onClose} className={`p-2 rounded-full transition-colors ${closeBtnClass}`}>

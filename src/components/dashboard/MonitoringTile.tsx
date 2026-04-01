@@ -37,14 +37,14 @@ export const MonitoringTile: React.FC<MonitoringTileProps> = ({ isEditMode, crit
             <Zap className="w-5 h-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="text-[0.625rem] font-black uppercase tracking-[0.2em] drop-shadow-md">Controle Remoto</span>
+            <span className="text-[0.625rem] font-display font-black uppercase tracking-[0.2em] drop-shadow-md">Controle Remoto</span>
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[0.5rem] font-bold text-white/50 uppercase tracking-widest">Mirror Live</span>
+              <span className="text-[0.5rem] font-display font-bold text-white/50 uppercase tracking-widest">Mirror Live</span>
             </div>
           </div>
         </div>
-        <span className="text-[0.625rem] font-black uppercase tracking-[0.2em] text-white/70">Acionamento Rápido</span>
+        <span className="text-[0.625rem] font-display font-black uppercase tracking-[0.2em] text-white/70">Acionamento Rápido</span>
       </div>
     </Link>
   );
