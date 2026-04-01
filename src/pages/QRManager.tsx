@@ -530,23 +530,22 @@ export default function QRManager() {
         }}
         title={editingLocation ? "Editar Ponto de Acesso" : "Novo Ponto de Acesso"}
         maxWidth="sm"
-        glass
       >
         <form onSubmit={handleAddLocation} className="space-y-6 p-4">
           <div>
-            <label className="block text-[0.625rem] font-black text-zinc-500 dark:text-white/30 uppercase tracking-[0.2em] mb-3">Identificação do Local</label>
+            <label className="block text-[0.625rem] font-black text-white/30 uppercase tracking-[0.2em] mb-3">Identificação do Local</label>
             <input
               required
               type="text"
               value={newLocationName}
               onChange={(e) => setNewLocationName(e.target.value)}
               placeholder="Ex: Elevador Social, Garagem G1..."
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-zinc-400 dark:focus:border-cyan-500/50 transition-all text-zinc-900 dark:text-white font-bold placeholder:text-zinc-400 dark:placeholder:text-white/10"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-cyan-500/50 transition-all text-white font-bold placeholder:text-white/10"
             />
           </div>
 
           <div>
-            <label className="block text-[0.625rem] font-black text-zinc-500 dark:text-white/30 uppercase tracking-[0.2em] mb-3">Tipo de Direcionamento</label>
+            <label className="block text-[0.625rem] font-black text-white/30 uppercase tracking-[0.2em] mb-3">Tipo de Direcionamento</label>
             <div className="grid grid-cols-2 gap-2">
               {[
                 { id: 'chat', label: 'Chat Suporte', icon: MessageSquare },
@@ -561,7 +560,7 @@ export default function QRManager() {
                   className={`p-4 rounded-2xl border flex flex-col items-center gap-2 transition-all ${
                     qrType === type.id 
                       ? 'bg-cyan-500 border-cyan-500 text-black' 
-                      : 'bg-zinc-50 dark:bg-white/5 border-zinc-200 dark:border-white/10 text-zinc-500 dark:text-white/40 hover:border-zinc-300 dark:hover:border-white/20'
+                      : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20'
                   }`}
                 >
                   <type.icon className="w-5 h-5" />
@@ -576,14 +575,14 @@ export default function QRManager() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <label className="block text-[0.625rem] font-black text-zinc-500 dark:text-white/30 uppercase tracking-[0.2em] mb-3">URL Externa</label>
+              <label className="block text-[0.625rem] font-black text-white/30 uppercase tracking-[0.2em] mb-3">URL Externa</label>
               <input
                 required
                 type="url"
                 value={externalUrl}
                 onChange={(e) => setExternalUrl(e.target.value)}
                 placeholder="https://exemplo.com"
-                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-zinc-400 dark:focus:border-cyan-500/50 transition-all text-zinc-900 dark:text-white font-bold placeholder:text-zinc-400 dark:placeholder:text-white/10"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-cyan-500/50 transition-all text-white font-bold placeholder:text-white/10"
               />
             </motion.div>
           )}
@@ -591,7 +590,7 @@ export default function QRManager() {
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="flex-1 py-4 text-zinc-500 dark:text-white/40 font-black uppercase tracking-widest text-xs hover:text-zinc-900 dark:hover:text-white transition-colors"
+              className="flex-1 py-4 text-white/40 font-black uppercase tracking-widest text-xs hover:text-white transition-colors"
             >
               Cancelar
             </button>

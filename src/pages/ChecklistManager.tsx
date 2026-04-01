@@ -152,25 +152,25 @@ export default function ChecklistManager() {
       >
         <form onSubmit={handleSubmit} className="space-y-6 p-2">
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/50 mb-2">Descrição da Tarefa *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-white/50 mb-2">Descrição da Tarefa *</label>
             <input 
               required
               type="text" 
               value={formData.task}
               onChange={e => setFormData({...formData, task: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
+              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
               placeholder="Ex: Verificar iluminação de emergência"
             />
           </div>
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/50 mb-2">Categoria *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-white/50 mb-2">Categoria *</label>
             <input 
               required
               type="text" 
               list="categories"
               value={formData.category}
               onChange={e => setFormData({...formData, category: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
+              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
               placeholder="Ex: Elétrica, Hidráulica, Segurança..."
             />
             <datalist id="categories">
@@ -180,22 +180,22 @@ export default function ChecklistManager() {
             </datalist>
           </div>
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/50 mb-4">Atribuir a Clientes (Opcional)</label>
-            <div className="max-h-64 overflow-y-auto border border-zinc-200 dark:border-white/10 rounded-xl p-4 space-y-2 bg-zinc-50 dark:bg-white/5">
-              <label className="flex items-center gap-3 p-3 hover:bg-zinc-100 dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+            <label className="block text-sm font-bold uppercase tracking-wider text-white/50 mb-4">Atribuir a Clientes (Opcional)</label>
+            <div className="max-h-64 overflow-y-auto border border-white/10 rounded-xl p-4 space-y-2 bg-white/5">
+              <label className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
                 <input 
                   type="checkbox"
                   checked={formData.clientIds.length === 0}
                   onChange={() => setFormData({...formData, clientIds: []})}
-                  className="w-5 h-5 rounded border-zinc-300 dark:border-white/20 bg-white dark:bg-white/5 text-zinc-900 dark:text-white focus:ring-zinc-400 dark:focus:ring-white/30"
+                  className="w-5 h-5 rounded border-white/20 bg-white/5 text-white focus:ring-white/30"
                 />
-                <span className="text-sm font-bold text-zinc-900 dark:text-white">Todos (Checklist Global)</span>
+                <span className="text-sm font-bold text-white">Todos (Checklist Global)</span>
               </label>
               
-              <div className="h-px bg-zinc-200 dark:bg-white/10 my-2" />
+              <div className="h-px bg-white/10 my-2" />
 
               {clients.map(client => (
-                <label key={client.id} className="flex items-center gap-3 p-3 hover:bg-zinc-100 dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+                <label key={client.id} className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
                   <input 
                     type="checkbox"
                     checked={formData.clientIds.includes(client.id)}
@@ -206,13 +206,13 @@ export default function ChecklistManager() {
                         setFormData({...formData, clientIds: formData.clientIds.filter(id => id !== client.id)});
                       }
                     }}
-                    className="w-5 h-5 rounded border-zinc-300 dark:border-white/20 bg-white dark:bg-white/5 text-zinc-900 dark:text-white focus:ring-zinc-400 dark:focus:ring-white/30"
+                    className="w-5 h-5 rounded border-white/20 bg-white/5 text-white focus:ring-white/30"
                   />
-                  <span className="text-sm text-zinc-600 dark:text-white/70">{client.name}</span>
+                  <span className="text-sm text-white/70">{client.name}</span>
                 </label>
               ))}
             </div>
-            <p className="text-xs text-zinc-400 dark:text-white/30 mt-3">
+            <p className="text-xs text-white/30 mt-3">
               Se nenhum for selecionado, a tarefa aparecerá para todos.
             </p>
           </div>
@@ -220,13 +220,13 @@ export default function ChecklistManager() {
             <button 
               type="button"
               onClick={closeModal}
-              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-zinc-900 dark:bg-white/20 hover:bg-zinc-800 dark:hover:bg-white/30 text-white px-10 py-3 rounded-xl font-bold backdrop-blur-md border border-zinc-800 dark:border-white/20 transition-all active:scale-95"
+              className="bg-white/20 hover:bg-white/30 text-white px-10 py-3 rounded-xl font-bold backdrop-blur-md border border-white/20 transition-all active:scale-95"
             >
               SALVAR
             </button>

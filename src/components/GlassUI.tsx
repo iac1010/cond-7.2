@@ -28,22 +28,22 @@ export const GlassCard: React.FC<GlassCardProps> = ({
     whileHover={hover ? { y: -4, transition: { duration: 0.2 } } : {}}
     className={`
       relative overflow-hidden
-      bg-white/80 dark:bg-zinc-900/40 
+      bg-white/10 dark:bg-zinc-900/40 
       backdrop-blur-xl backdrop-saturate-150
-      border border-zinc-200 dark:border-white/10
-      shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]
+      border border-white/20 dark:border-white/10
+      shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]
       rounded-3xl
       ${className}
     `}
   >
     {/* Header if title or icon exists */}
     {(title || Icon) && (
-      <div className="px-6 py-4 border-b border-zinc-100 dark:border-white/5 flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {Icon && <Icon className="w-4 h-4 text-purple-500 dark:text-purple-400" />}
+          {Icon && <Icon className="w-4 h-4 text-purple-400" />}
           <div>
-            <h3 className="text-[0.625rem] font-bold text-zinc-500 dark:text-white/70 uppercase tracking-[0.2em]">{title}</h3>
-            {subtitle && <p className="text-[0.5rem] text-zinc-400 dark:text-white/30 uppercase mt-0.5 tracking-widest">{subtitle}</p>}
+            <h3 className="text-[0.625rem] font-bold text-white/70 uppercase tracking-[0.2em]">{title}</h3>
+            {subtitle && <p className="text-[0.5rem] text-white/30 uppercase mt-0.5 tracking-widest">{subtitle}</p>}
           </div>
         </div>
         {action && action}
@@ -108,13 +108,13 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-[0.625rem] font-bold text-zinc-900 dark:text-white">{Math.round(value)}%</span>
+          <span className="text-[0.625rem] font-bold">{Math.round(value)}%</span>
         </div>
       </div>
       {(label || sublabel) && (
         <div className="text-center">
-          {label && <div className="text-[0.625rem] font-bold text-zinc-500 dark:text-white/50 uppercase tracking-wider">{label}</div>}
-          {sublabel && <div className="text-[0.5rem] text-zinc-400 dark:text-white/30 uppercase mt-0.5">{sublabel}</div>}
+          {label && <div className="text-[0.625rem] font-bold text-white/50 uppercase tracking-wider">{label}</div>}
+          {sublabel && <div className="text-[0.5rem] text-white/30 uppercase mt-0.5">{sublabel}</div>}
         </div>
       )}
     </div>

@@ -262,50 +262,50 @@ export default function Marketplace() {
         )}
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title={editingId ? "Editar Anúncio" : "Novo Anúncio"} glass={true}>
+      <Modal isOpen={isModalOpen} onClose={closeModal} title={editingId ? "Editar Anúncio" : "Novo Anúncio"}>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Título</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Título</label>
             <input
               type="text"
               required
               value={formData.title}
               onChange={e => setFormData({...formData, title: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
               placeholder="Ex: Bicicleta Caloi Aro 29"
             />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Categoria</label>
+              <label className="block text-sm font-medium text-white/60 mb-1">Categoria</label>
               <select
                 required
                 value={formData.category}
                 onChange={e => setFormData({...formData, category: e.target.value as any})}
-                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
               >
-                <option value="PRODUTO" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Produto</option>
-                <option value="SERVICO" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Serviço</option>
-                <option value="CARONA" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Carona</option>
-                <option value="OUTRO" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Outro</option>
+                <option value="PRODUTO" className="bg-zinc-900">Produto</option>
+                <option value="SERVICO" className="bg-zinc-900">Serviço</option>
+                <option value="CARONA" className="bg-zinc-900">Carona</option>
+                <option value="OUTRO" className="bg-zinc-900">Outro</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Preço (R$)</label>
+              <label className="block text-sm font-medium text-white/60 mb-1">Preço (R$)</label>
               <input
                 type="number"
                 step="0.01"
                 value={formData.price}
                 onChange={e => setFormData({...formData, price: e.target.value})}
-                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
                 placeholder="Opcional"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Morador (Anunciante)</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Morador (Anunciante)</label>
             <select
               required
               value={formData.authorId}
@@ -317,11 +317,11 @@ export default function Marketplace() {
                   contactPhone: client ? client.phone : formData.contactPhone
                 });
               }}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
             >
-              <option value="" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Selecione o morador</option>
+              <option value="" className="bg-zinc-900">Selecione o morador</option>
               {clients.map(client => (
-                <option key={client.id} value={client.id} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">
+                <option key={client.id} value={client.id} className="bg-zinc-900">
                   {client.name} {client.unit ? `- Apto ${client.unit}` : ''}
                 </option>
               ))}
@@ -329,36 +329,36 @@ export default function Marketplace() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Telefone de Contato</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Telefone de Contato</label>
             <input
               type="text"
               required
               value={formData.contactPhone}
               onChange={e => setFormData({...formData, contactPhone: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
               placeholder="(00) 00000-0000"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Descrição</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Descrição</label>
             <textarea
               required
               rows={3}
               value={formData.description}
               onChange={e => setFormData({...formData, description: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none resize-none"
               placeholder="Descreva os detalhes do anúncio..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">URLs das Imagens (separadas por vírgula)</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">URLs das Imagens (separadas por vírgula)</label>
             <input
               type="text"
               value={formData.images}
               onChange={e => setFormData({...formData, images: e.target.value})}
-              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
               placeholder="https://exemplo.com/img1.jpg, https://exemplo.com/img2.jpg"
             />
           </div>
@@ -367,13 +367,13 @@ export default function Marketplace() {
             <button
               type="button"
               onClick={closeModal}
-              className="px-4 py-2 text-zinc-400 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              className="px-4 py-2 text-white/60 hover:text-white transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="bg-zinc-900 dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-bold hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
+              className="bg-white text-black px-6 py-2 rounded-lg font-bold hover:bg-white/90 transition-colors"
             >
               {editingId ? 'Salvar' : 'Criar Anúncio'}
             </button>

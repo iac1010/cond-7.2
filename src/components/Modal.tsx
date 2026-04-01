@@ -27,11 +27,11 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = 'md', glass
   if (!isOpen) return null;
 
   const bgClass = glass 
-    ? 'bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-zinc-200 dark:border-white/20 text-zinc-900 dark:text-white' 
-    : 'bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800 text-zinc-900 dark:text-white';
+    ? 'bg-white/10 backdrop-blur-xl border-white/20 text-white' 
+    : 'bg-white dark:bg-zinc-900 border-gray-100 dark:border-zinc-800';
   
-  const titleClass = 'text-zinc-900 dark:text-white';
-  const closeBtnClass = 'hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 dark:text-zinc-500';
+  const titleClass = glass ? 'text-white' : 'text-zinc-900 dark:text-white';
+  const closeBtnClass = glass ? 'hover:bg-white/10 text-white/50' : 'hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-400';
 
   return (
     <div className="fixed inset-0 bg-zinc-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
