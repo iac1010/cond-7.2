@@ -19,3 +19,17 @@ export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
   supabaseAnonKey || 'placeholder-key'
 );
+
+/**
+ * Signs in a user using Google OAuth 2.0.
+ * This implements industry-standard OAuth 2.0/OpenID Connect.
+ */
+export const signInWithGoogle = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  return { data, error };
+};

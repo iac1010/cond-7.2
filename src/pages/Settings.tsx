@@ -49,7 +49,14 @@ export default function Settings() {
     onConfirm: () => {},
   });
 
-  const [activeTab, setActiveTab] = useState<'general' | 'users'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'users' | 'security'>('general');
+  const { 
+    mfaEnabled, toggleMfa,
+    dataConsent, setDataConsent,
+    encryptionActive, toggleEncryption,
+    securityLogs
+  } = useStore();
+
   const [isUserFormOpen, setIsUserFormOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<any>(null);
   const [userFormData, setUserFormData] = useState({
@@ -332,6 +339,16 @@ export default function Settings() {
           }`}
         >
           <Users className="w-5 h-5" /> USUÁRIOS
+        </button>
+        <button
+          onClick={() => setActiveTab('security')}
+          className={`px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 ${
+            activeTab === 'security' 
+              ? 'bg-white text-[#004a7c] shadow-lg' 
+              : 'bg-white/10 text-white hover:bg-white/20'
+          }`}
+        >
+          <Shield className="w-5 h-5" /> SEGURANÇA
         </button>
       </div>
 
@@ -925,6 +942,128 @@ export default function Settings() {
                     )}
                   </tbody>
                 </table>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {activeTab === 'security' && (
+          <div className="space-y-8">
+            {/* MFA & Authentication */}
+            <motion.div variants={itemVariants} className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl text-zinc-900">
+              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <Shield className="w-6 h-6 text-blue-600" />
+                Autenticação e Identidade
+              </h2>
+              <div className="space-y-6">
+                <div className="flex items-center justify-between p-6 bg-white rounded-2xl border border-zinc-100">
+                  <div>
+                    <h3 className="font-bold text-lg">Autenticação de Dois Fatores (MFA)</h3>
+                    <p className="text-zinc-500 text-sm">Adicione uma camada extra de segurança à sua conta usando um aplicativo autenticador.</p>
+                  </div>
+                  <button 
+                    onClick={toggleMfa}
+                    className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none ${
+                      mfaEnabled ? 'bg-blue-600' : 'bg-zinc-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                      mfaEnabled ? 'translate-x-7' : 'translate-x-1'
+                    }`} />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between p-6 bg-white rounded-2xl border border-zinc-100">
+                  <div>
+                    <h3 className="font-bold text-lg">Criptografia de Dados Sensíveis (AES-256)</h3>
+                    <p className="text-zinc-500 text-sm">Criptografa informações críticas antes de serem armazenadas no banco de dados.</p>
+                  </div>
+                  <button 
+                    onClick={toggleEncryption}
+                    className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none ${
+                      encryptionActive ? 'bg-blue-600' : 'bg-zinc-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                      encryptionActive ? 'translate-x-7' : 'translate-x-1'
+                    }`} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Privacy & LGPD */}
+            <motion.div variants={itemVariants} className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl text-zinc-900">
+              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <Database className="w-6 h-6 text-emerald-600" />
+                Privacidade e LGPD
+              </h2>
+              <div className="space-y-6">
+                <div className="flex items-center justify-between p-6 bg-white rounded-2xl border border-zinc-100">
+                  <div>
+                    <h3 className="font-bold text-lg">Consentimento de Uso de Dados</h3>
+                    <p className="text-zinc-500 text-sm">Ao ativar, você confirma que leu e aceita os termos de uso e política de privacidade em conformidade com a LGPD.</p>
+                  </div>
+                  <button 
+                    onClick={() => setDataConsent(!dataConsent)}
+                    className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none ${
+                      dataConsent ? 'bg-emerald-600' : 'bg-zinc-200'
+                    }`}
+                  >
+                    <span className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                      dataConsent ? 'translate-x-7' : 'translate-x-1'
+                    }`} />
+                  </button>
+                </div>
+                <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100">
+                  <h4 className="font-bold text-blue-900 mb-2">Política de Privacidade</h4>
+                  <p className="text-blue-700 text-sm mb-4">Seus dados são protegidos por TLS 1.3 e armazenados em servidores seguros com criptografia em repouso.</p>
+                  <button className="text-blue-600 font-bold text-sm hover:underline">VISUALIZAR POLÍTICA COMPLETA</button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Security Logs */}
+            <motion.div variants={itemVariants} className="bg-zinc-50 rounded-3xl border border-zinc-200 p-8 shadow-xl text-zinc-900">
+              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <FileUp className="w-6 h-6 text-amber-600" />
+                Logs de Segurança
+              </h2>
+              <div className="bg-white rounded-2xl border border-zinc-100 overflow-hidden">
+                <div className="max-h-[300px] overflow-y-auto">
+                  <table className="w-full">
+                    <thead className="bg-zinc-50 sticky top-0">
+                      <tr>
+                        <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-zinc-400">Evento</th>
+                        <th className="text-left py-3 px-4 text-[10px] font-black uppercase tracking-widest text-zinc-400">Data/Hora</th>
+                        <th className="text-right py-3 px-4 text-[10px] font-black uppercase tracking-widest text-zinc-400">Gravidade</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-100">
+                      {securityLogs.length === 0 ? (
+                        <tr>
+                          <td colSpan={3} className="py-8 text-center text-zinc-400 italic text-sm">Nenhum log registrado.</td>
+                        </tr>
+                      ) : (
+                        securityLogs.map(log => (
+                          <tr key={log.id} className="text-sm">
+                            <td className="py-3 px-4 font-medium">{log.event}</td>
+                            <td className="py-3 px-4 text-zinc-500">{new Date(log.timestamp).toLocaleString('pt-BR')}</td>
+                            <td className="py-3 px-4 text-right">
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                log.severity === 'CRITICAL' ? 'bg-red-100 text-red-600' :
+                                log.severity === 'WARNING' ? 'bg-amber-100 text-amber-600' :
+                                'bg-blue-100 text-blue-600'
+                              }`}>
+                                {log.severity}
+                              </span>
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </motion.div>
           </div>

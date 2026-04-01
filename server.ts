@@ -3,6 +3,9 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
@@ -24,6 +27,38 @@ let lastMessageExtracted: string | null = null;
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // Trust proxy for express-rate-limit to work correctly behind a proxy (e.g. nginx)
+  app.set('trust proxy', 1);
+
+  // 1. Security Headers (OWASP)
+  app.use(helmet({
+    contentSecurityPolicy: false, // Disable CSP for Vite dev server compatibility
+    crossOriginEmbedderPolicy: false
+  }));
+
+  // 2. CORS Protection
+  app.use(cors({
+    origin: '*', // In production, replace with specific domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-goog-api-key']
+  }));
+
+  // 3. Rate Limiting (DoS protection)
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again after 15 minutes',
+    standardHeaders: true,
+    legacyHeaders: false,
+    // Disable validation checks for proxy headers since we've configured Express trust proxy
+    validate: {
+      trustProxy: false,
+      xForwardedForHeader: false,
+      forwardedHeader: false,
+    },
+  });
+  app.use('/api/', limiter);
 
   app.use(express.json());
 

@@ -69,6 +69,32 @@ export default function BillingRules() {
                 placeholder="Use {nome} e {vencimento} como variáveis"
               />
             </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">Dias Antes do Vencimento (separados por vírgula)</label>
+              <input
+                type="text"
+                value={newRule.daysBeforeDue.join(', ')}
+                onChange={(e) => {
+                  const days = e.target.value.split(',').map(d => parseInt(d.trim())).filter(d => !isNaN(d));
+                  setNewRule({ ...newRule, daysBeforeDue: days });
+                }}
+                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:ring-2 focus:ring-blue-500 outline-none"
+                placeholder="Ex: 5, 2"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">Dias Após o Vencimento (separados por vírgula)</label>
+              <input
+                type="text"
+                value={newRule.daysAfterDue.join(', ')}
+                onChange={(e) => {
+                  const days = e.target.value.split(',').map(d => parseInt(d.trim())).filter(d => !isNaN(d));
+                  setNewRule({ ...newRule, daysAfterDue: days });
+                }}
+                className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:ring-2 focus:ring-blue-500 outline-none"
+                placeholder="Ex: 1, 5, 10, 15"
+              />
+            </div>
           </div>
           <div className="flex justify-end gap-3">
             <button

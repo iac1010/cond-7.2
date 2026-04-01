@@ -632,50 +632,50 @@ export default function SuppliesManager() {
         <form onSubmit={handleItemSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Nome do Produto</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Nome do Produto</label>
               <input 
                 required
                 type="text" 
                 value={itemForm.name}
                 onChange={e => setItemForm({...itemForm, name: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
                 placeholder="Ex: Cloro Granulado"
               />
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Categoria</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Categoria</label>
               <select 
                 value={itemForm.category}
                 onChange={e => setItemForm({...itemForm, category: e.target.value as any})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               >
-                <option value="LIMPEZA">Limpeza</option>
-                <option value="PISCINA">Piscina</option>
+                <option value="LIMPEZA" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Limpeza</option>
+                <option value="PISCINA" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Piscina</option>
               </select>
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Unidade</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Unidade</label>
               <input 
                 required
                 type="text" 
                 value={itemForm.unit}
                 onChange={e => setItemForm({...itemForm, unit: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
                 placeholder="Ex: Balde, Litro, Galão"
               />
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Estoque Mínimo</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Estoque Mínimo</label>
               <input 
                 required
                 type="number" 
                 value={itemForm.minStock}
                 onChange={e => setItemForm({...itemForm, minStock: parseInt(e.target.value)})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               />
             </div>
           </div>
-          <button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white py-4 rounded-xl font-bold border border-white/20 transition-all active:scale-95">
+          <button type="submit" className="w-full bg-zinc-900 dark:bg-white/10 hover:bg-zinc-800 dark:hover:bg-white/20 text-white py-4 rounded-xl font-bold border border-zinc-800 dark:border-white/20 transition-all active:scale-95">
             {editingItem ? 'SALVAR ALTERAÇÕES' : 'CADASTRAR ITEM'}
           </button>
         </form>
@@ -690,59 +690,59 @@ export default function SuppliesManager() {
         <form onSubmit={handleSupplierSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Nome da Empresa</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Nome da Empresa</label>
               <input 
                 required
                 type="text" 
                 value={supplierForm.name}
                 onChange={e => setSupplierForm({...supplierForm, name: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               />
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Responsável</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Responsável</label>
               <input 
                 required
                 type="text" 
                 value={supplierForm.contact}
                 onChange={e => setSupplierForm({...supplierForm, contact: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               />
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Telefone</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Telefone</label>
               <input 
                 required
                 type="text" 
                 value={supplierForm.phone}
                 onChange={e => setSupplierForm({...supplierForm, phone: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">E-mail</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">E-mail</label>
               <input 
                 required
                 type="email" 
                 value={supplierForm.email}
                 onChange={e => setSupplierForm({...supplierForm, email: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs font-black uppercase tracking-widest text-white/40 mb-2">Especialidade</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 mb-2">Especialidade</label>
               <select 
                 value={supplierForm.category}
                 onChange={e => setSupplierForm({...supplierForm, category: e.target.value as any})}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-white/30 transition-all"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-zinc-400 dark:focus:border-white/30 transition-all text-zinc-900 dark:text-white"
               >
-                <option value="GERAL">Geral</option>
-                <option value="LIMPEZA">Limpeza</option>
-                <option value="PISCINA">Piscina</option>
+                <option value="GERAL" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Geral</option>
+                <option value="LIMPEZA" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Limpeza</option>
+                <option value="PISCINA" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Piscina</option>
               </select>
             </div>
           </div>
-          <button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white py-4 rounded-xl font-bold border border-white/20 transition-all active:scale-95">
+          <button type="submit" className="w-full bg-zinc-900 dark:bg-white/10 hover:bg-zinc-800 dark:hover:bg-white/20 text-white py-4 rounded-xl font-bold border border-zinc-800 dark:border-white/20 transition-all active:scale-95">
             {editingSupplier ? 'SALVAR ALTERAÇÕES' : 'CADASTRAR FORNECEDOR'}
           </button>
         </form>
@@ -758,15 +758,15 @@ export default function SuppliesManager() {
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">Selecionar Itens</h3>
+              <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white">Selecionar Itens</h3>
               <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
                 {(selectedClientId ? filteredSupplyItems : supplyItems).map(item => {
                   const selected = quotationItems.find(qi => qi.supplyItemId === item.id);
                   return (
-                    <div key={item.id} className={`p-4 rounded-2xl border transition-all ${selected ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/10 hover:border-white/20'}`}>
+                    <div key={item.id} className={`p-4 rounded-2xl border transition-all ${selected ? 'bg-zinc-900/10 dark:bg-white/20 border-zinc-900/20 dark:border-white/40' : 'bg-zinc-50 dark:bg-white/5 border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'}`}>
                       <div className="flex justify-between items-center mb-3">
-                        <span className="font-bold">{item.name}</span>
-                        <span className="text-xs opacity-40">{item.currentStock} {item.unit} em estoque</span>
+                        <span className="font-bold text-zinc-900 dark:text-white">{item.name}</span>
+                        <span className="text-xs text-zinc-500 dark:text-white/40">{item.currentStock} {item.unit} em estoque</span>
                       </div>
                       <div className="flex items-center gap-4">
                         <input 
@@ -785,9 +785,9 @@ export default function SuppliesManager() {
                               setQuotationItems(prev => prev.filter(qi => qi.supplyItemId !== item.id));
                             }
                           }}
-                          className="w-24 bg-white/10 border border-white/10 rounded-xl px-3 py-2 outline-none focus:border-white/30"
+                          className="w-24 bg-white dark:bg-white/10 border border-zinc-200 dark:border-white/10 rounded-xl px-3 py-2 outline-none focus:border-zinc-400 dark:focus:border-white/30 text-zinc-900 dark:text-white"
                         />
-                        <span className="text-sm opacity-40">{item.unit}</span>
+                        <span className="text-sm text-zinc-500 dark:text-white/40">{item.unit}</span>
                       </div>
                     </div>
                   );
@@ -796,8 +796,8 @@ export default function SuppliesManager() {
             </div>
 
             <div>
-              <h3 className="text-xl font-bold mb-4">Resumo da Cotação</h3>
-              <div className="bg-white/5 rounded-3xl p-6 border border-white/10 h-full flex flex-col">
+              <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white">Resumo da Cotação</h3>
+              <div className="bg-zinc-50 dark:bg-white/5 rounded-3xl p-6 border border-zinc-200 dark:border-white/10 h-full flex flex-col">
                 {quotationItems.length === 0 ? (
                   <div className="flex-1 flex flex-col items-center justify-center text-white/30 text-center">
                     <Clock className="w-12 h-12 mb-4 opacity-20" />

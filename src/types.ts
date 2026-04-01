@@ -552,6 +552,32 @@ export interface AppState {
   biaOnline: boolean;
   fontSize: number;
   
+  // IoT Devices
+  iotDevices: Array<{
+    id: string;
+    name: string;
+    type: 'SENSOR' | 'ACTUATOR' | 'GATEWAY';
+    status: 'ONLINE' | 'OFFLINE';
+    lastSeen: string;
+    deviceKey: string;
+    firmwareVersion: string;
+    mqttTls: boolean;
+  }>;
+  addIotDevice: (device: Omit<AppState['iotDevices'][0], 'id' | 'deviceKey' | 'lastSeen' | 'status'>) => void;
+  deleteIotDevice: (id: string) => void;
+  updateIotDevice: (id: string, updated: Partial<AppState['iotDevices'][0]>) => void;
+  
+  // Security State
+  mfaEnabled: boolean;
+  dataConsent: boolean;
+  encryptionActive: boolean;
+  securityLogs: Array<{
+    id: string;
+    event: string;
+    timestamp: string;
+    severity: 'INFO' | 'WARNING' | 'CRITICAL';
+  }>;
+  
   fetchInitialData: () => Promise<void>;
   setBiaOnline: (online: boolean) => void;
   setFontSize: (size: number) => Promise<void>;
@@ -565,6 +591,10 @@ export interface AppState {
   toggleTheme: () => Promise<void>;
   toggleWhatsApp: () => void;
   toggleBia: () => void;
+  toggleMfa: () => void;
+  setDataConsent: (consent: boolean) => void;
+  toggleEncryption: () => void;
+  addSecurityLog: (event: string, severity?: 'INFO' | 'WARNING' | 'CRITICAL') => void;
   login: (user: string, pass: string) => boolean;
   logout: () => void;
   

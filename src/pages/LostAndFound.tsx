@@ -263,52 +263,52 @@ export default function LostAndFoundPage() {
       <Modal isOpen={isModalOpen} onClose={closeModal} title={editingId ? "Editar Item" : "Registrar Item Encontrado"}>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-1">O que foi encontrado?</label>
+            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">O que foi encontrado?</label>
             <input
               type="text"
               required
               value={formData.title}
               onChange={e => setFormData({...formData, title: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
               placeholder="Ex: Chave de carro com chaveiro azul"
             />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-1">Local (Onde achou?)</label>
+              <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Local (Onde achou?)</label>
               <input
                 type="text"
                 required
                 value={formData.location}
                 onChange={e => setFormData({...formData, location: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
                 placeholder="Ex: Piscina, Elevador Social"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/60 mb-1">Data</label>
+              <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Data</label>
               <input
                 type="date"
                 required
                 value={formData.dateFound}
                 onChange={e => setFormData({...formData, dateFound: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
+                className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-1">Quem encontrou?</label>
+            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Quem encontrou?</label>
             <select
               required
               value={formData.reporterId}
               onChange={e => setFormData({...formData, reporterId: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
             >
-              <option value="" className="bg-zinc-900">Selecione a pessoa</option>
+              <option value="" className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">Selecione a pessoa</option>
               {clients.map(client => (
-                <option key={client.id} value={client.id} className="bg-zinc-900">
+                <option key={client.id} value={client.id} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white">
                   {client.name} {client.unit ? `- Apto ${client.unit}` : ''}
                 </option>
               ))}
@@ -316,24 +316,24 @@ export default function LostAndFoundPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-1">Descrição Detalhada</label>
+            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">Descrição Detalhada</label>
             <textarea
               required
               rows={3}
               value={formData.description}
               onChange={e => setFormData({...formData, description: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none resize-none"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none resize-none"
               placeholder="Descreva cor, marca, detalhes que ajudem na identificação..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white/60 mb-1">URLs das Imagens (separadas por vírgula)</label>
+            <label className="block text-sm font-medium text-zinc-500 dark:text-white/60 mb-1">URLs das Imagens (separadas por vírgula)</label>
             <input
               type="text"
               value={formData.images}
               onChange={e => setFormData({...formData, images: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-white/30 outline-none"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-lg px-4 py-2 text-zinc-900 dark:text-white focus:border-zinc-400 dark:focus:border-white/30 outline-none"
               placeholder="https://exemplo.com/img1.jpg"
             />
           </div>
@@ -342,13 +342,13 @@ export default function LostAndFoundPage() {
             <button
               type="button"
               onClick={closeModal}
-              className="px-4 py-2 text-white/60 hover:text-white transition-colors"
+              className="px-4 py-2 text-zinc-400 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="bg-white text-black px-6 py-2 rounded-lg font-bold hover:bg-white/90 transition-colors"
+              className="bg-zinc-900 dark:bg-white text-white dark:text-black px-6 py-2 rounded-lg font-bold hover:bg-zinc-800 dark:hover:bg-white/90 transition-colors"
             >
               {editingId ? 'Salvar' : 'Registrar'}
             </button>

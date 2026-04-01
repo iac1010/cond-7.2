@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase, isSupabaseConfigured, isLocalSupabase } from './lib/supabase';
+import { Security } from './lib/security';
 import { toast } from 'react-hot-toast';
 import { NBR5674_STANDARDS } from './constants/maintenance';
 import { GoogleGenAI, Type } from "@google/genai";
@@ -44,6 +45,14 @@ export const useStore = create<AppState>()(
           daysAfterDue: [1, 5, 10],
           messageTemplate: 'Olá {nome}, lembramos que seu boleto vence em {vencimento}.',
           active: true
+        },
+        {
+          id: '2',
+          name: 'Aviso de Inadimplência (15 dias)',
+          daysBeforeDue: [],
+          daysAfterDue: [15],
+          messageTemplate: 'Prezado {nome}, identificamos que seu boleto vencido em {vencimento} ainda não foi quitado. Por favor, regularize sua situação.',
+          active: true
         }
       ],
       budgetForecasts: [],
@@ -65,6 +74,28 @@ export const useStore = create<AppState>()(
       classifieds: [],
       lostAndFound: [],
       users: [],
+      iotDevices: [
+        {
+          id: '1',
+          name: 'Portão Principal (ESP32)',
+          type: 'ACTUATOR',
+          status: 'ONLINE',
+          lastSeen: new Date().toISOString(),
+          deviceKey: 'dev_key_778899',
+          firmwareVersion: '1.2.0',
+          mqttTls: true
+        },
+        {
+          id: '2',
+          name: 'Sensor de Nível Caixa d\'água',
+          type: 'SENSOR',
+          status: 'ONLINE',
+          lastSeen: new Date().toISOString(),
+          deviceKey: 'dev_key_112233',
+          firmwareVersion: '1.0.5',
+          mqttTls: true
+        }
+      ],
       iotState: {
         pumps: {
           caixa: false,
@@ -90,6 +121,10 @@ export const useStore = create<AppState>()(
         address: '',
         website: ''
       },
+      mfaEnabled: false,
+      dataConsent: false,
+      encryptionActive: false,
+      securityLogs: [],
       theme: 'light',
       isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
       menuOrder: ['dashboard', 'accountability', 'consumption', 'clients', 'products', 'supplies', 'tickets', 'kanban', 'quotes', 'receipts', 'financial', 'calendar', 'marketplace', 'lost-and-found', 'settings'],
@@ -698,6 +733,61 @@ export const useStore = create<AppState>()(
         set((state) => ({ biaEnabled: !state.biaEnabled }));
         toast.success(`Bia ${get().biaEnabled ? 'ativada' : 'desativada'}`);
       },
+      toggleMfa: () => {
+        const newState = !get().mfaEnabled;
+        set({ mfaEnabled: newState });
+        get().addSecurityLog(`MFA ${newState ? 'ativado' : 'desativado'}`, newState ? 'INFO' : 'WARNING');
+        toast.success(`MFA ${newState ? 'ativado' : 'desativado'}`);
+      },
+      setDataConsent: (consent: boolean) => {
+        set({ dataConsent: consent });
+        get().addSecurityLog(`Consentimento de dados ${consent ? 'aceito' : 'revogado'}`, 'INFO');
+      },
+      toggleEncryption: () => {
+        const newState = !get().encryptionActive;
+        set({ encryptionActive: newState });
+        get().addSecurityLog(`Criptografia AES-256 ${newState ? 'ativada' : 'desativada'}`, 'INFO');
+        toast.success(`Criptografia AES-256 ${newState ? 'ativada' : 'desativada'}`);
+      },
+      addIotDevice: (device) => {
+        const id = uuidv4();
+        // Import Security dynamically to avoid circular dependencies if any, 
+        // but here it's fine as it's a utility.
+        const deviceKey = `dk_${Math.random().toString(36).substring(2, 15)}`; 
+        set((state) => ({
+          iotDevices: [...state.iotDevices, { 
+            ...device, 
+            id, 
+            deviceKey, 
+            lastSeen: new Date().toISOString(),
+            status: 'OFFLINE'
+          }]
+        }));
+        get().addSecurityLog(`Novo dispositivo IoT adicionado: ${device.name}`, 'INFO');
+      },
+      deleteIotDevice: (id) => {
+        const device = get().iotDevices.find(d => d.id === id);
+        set((state) => ({
+          iotDevices: state.iotDevices.filter(d => d.id !== id)
+        }));
+        if (device) get().addSecurityLog(`Dispositivo IoT removido: ${device.name}`, 'WARNING');
+      },
+      updateIotDevice: (id, updated) => {
+        set((state) => ({
+          iotDevices: state.iotDevices.map(d => d.id === id ? { ...d, ...updated } : d)
+        }));
+      },
+      addSecurityLog: (event: string, severity: 'INFO' | 'WARNING' | 'CRITICAL' = 'INFO') => set((state) => ({
+        securityLogs: [
+          {
+            id: uuidv4(),
+            event,
+            timestamp: new Date().toISOString(),
+            severity
+          },
+          ...state.securityLogs.slice(0, 99)
+        ]
+      })),
       
       login: (user, pass) => {
         if (user === 'iac' && pass === '112213') {
@@ -2536,11 +2626,30 @@ export const useStore = create<AppState>()(
       updateReservation: (id, reservation) => set((state) => ({ reservations: state.reservations.map(r => r.id === id ? { ...r, ...reservation } : r) })),
       deleteReservation: (id) => set((state) => ({ reservations: state.reservations.filter(r => r.id !== id) })),
 
-      addStaff: (staff) => set((state) => ({ staff: [...state.staff, { ...staff, id: uuidv4() }] })),
+      addStaff: (staff) => {
+        const encryptionActive = get().encryptionActive;
+        const processedStaff = {
+          ...staff,
+          id: uuidv4(),
+          email: encryptionActive ? Security.encrypt(staff.email) : staff.email,
+          phone: encryptionActive ? Security.encrypt(staff.phone) : staff.phone
+        };
+        set((state) => ({ staff: [...state.staff, processedStaff] }));
+        get().addSecurityLog(`Funcionário adicionado: ${staff.name}${encryptionActive ? ' (Dados Criptografados)' : ''}`, 'INFO');
+      },
       updateStaff: (id, staff) => set((state) => ({ staff: state.staff.map(s => s.id === id ? { ...s, ...staff } : s) })),
       deleteStaff: (id) => set((state) => ({ staff: state.staff.filter(s => s.id !== id) })),
 
-      addKey: (key) => set((state) => ({ keys: [...state.keys, { ...key, id: uuidv4() }] })),
+      addKey: (key) => {
+        const encryptionActive = get().encryptionActive;
+        const processedKey = {
+          ...key,
+          id: uuidv4(),
+          borrowedBy: (encryptionActive && key.borrowedBy) ? Security.encrypt(key.borrowedBy) : key.borrowedBy
+        };
+        set((state) => ({ keys: [...state.keys, processedKey] }));
+        get().addSecurityLog(`Chave adicionada: ${key.keyName}${encryptionActive ? ' (Dados Criptografados)' : ''}`, 'INFO');
+      },
       updateKey: (id, key) => set((state) => ({ keys: state.keys.map(k => k.id === id ? { ...k, ...key } : k) })),
       deleteKey: (id) => set((state) => ({ keys: state.keys.filter(k => k.id !== id) })),
 

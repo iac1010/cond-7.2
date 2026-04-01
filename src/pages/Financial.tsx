@@ -232,12 +232,12 @@ export default function Financial() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl">
-          <p className="text-white/40 text-[0.625rem] font-black uppercase tracking-widest mb-2">{label}</p>
+        <div className="bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xl border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-2xl">
+          <p className="text-zinc-500 dark:text-white/40 text-[0.625rem] font-black uppercase tracking-widest mb-2">{label}</p>
           {payload.map((entry: any, index: number) => (
             <div key={index} className="flex items-center gap-3 mb-1">
               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }} />
-              <p className="text-sm font-bold text-white">
+              <p className="text-sm font-bold text-zinc-900 dark:text-white">
                 {entry.name}: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(entry.value)}
               </p>
             </div>
@@ -541,21 +541,21 @@ export default function Financial() {
       <GlassCard title="Fluxo de Caixa Detalhado">
         <div ref={tableContainerRef} className="overflow-auto max-h-[400px] custom-scrollbar">
           <table className="w-full text-left relative">
-            <thead className="sticky top-0 bg-[#0a192f]/90 backdrop-blur-md z-10">
-              <tr className="border-b border-white/10">
-                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-white/40">Data</th>
-                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-white/40">Descrição</th>
-                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-white/40">Categoria/Cliente</th>
-                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-white/40 text-right">Valor</th>
+            <thead className="sticky top-0 bg-white dark:bg-[#0a192f]/90 backdrop-blur-md z-10">
+              <tr className="border-b border-zinc-200 dark:border-white/10">
+                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">Data</th>
+                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">Descrição</th>
+                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">Categoria/Cliente</th>
+                <th className="pb-4 pt-4 text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40 text-right">Valor</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5" style={{ height: `${rowVirtualizer.getTotalSize()}px`, position: 'relative' }}>
+            <tbody className="divide-y divide-zinc-100 dark:divide-white/5" style={{ height: `${rowVirtualizer.getTotalSize()}px`, position: 'relative' }}>
               {rowVirtualizer.getVirtualItems().map((virtualRow) => {
                 const t = transactions[virtualRow.index];
                 return (
                   <tr 
                     key={t.id} 
-                    className="group hover:bg-white/5 transition-colors absolute w-full"
+                    className="group hover:bg-zinc-50 dark:hover:bg-white/5 transition-colors absolute w-full"
                     style={{
                       top: 0,
                       left: 0,
@@ -563,12 +563,12 @@ export default function Financial() {
                       transform: `translateY(${virtualRow.start}px)`,
                     }}
                   >
-                    <td className="py-4 text-sm text-white/60">{safeFormatDate(t.date)}</td>
-                    <td className="py-4 text-sm font-bold text-white">{t.description}</td>
-                    <td className="py-4 text-sm text-white/40">
+                    <td className="py-4 text-sm text-zinc-500 dark:text-white/60">{safeFormatDate(t.date)}</td>
+                    <td className="py-4 text-sm font-bold text-zinc-900 dark:text-white">{t.description}</td>
+                    <td className="py-4 text-sm text-zinc-400 dark:text-white/40">
                       {t.type === 'income' ? (clients.find(c => c.id === (t as any).clientId)?.name || 'Cliente') : (t as any).category}
                     </td>
-                    <td className={`py-4 text-sm font-black text-right ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                    <td className={`py-4 text-sm font-black text-right ${t.type === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                       {t.type === 'income' ? '+' : '-'} {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(t.value)}
                     </td>
                   </tr>
@@ -591,28 +591,29 @@ export default function Financial() {
         isOpen={showAIModal}
         onClose={() => setShowAIModal(false)}
         title="Inteligência Financeira Condominial"
+        glass={true}
       >
         <div className="p-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
           {isAIProcessing ? (
             <div className="flex flex-col items-center justify-center py-12 gap-4">
               <Loader2 className="w-12 h-12 text-purple-400 animate-spin" />
-              <p className="text-white/60 font-medium animate-pulse">A IA está analisando seus dados financeiros...</p>
+              <p className="text-zinc-500 dark:text-white/60 font-medium animate-pulse">A IA está analisando seus dados financeiros...</p>
             </div>
           ) : (
-            <div className="prose prose-invert max-w-none">
+            <div className="prose dark:prose-invert max-w-none">
               <div className="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-6 mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Brain className="w-6 h-6 text-purple-400" />
-                  <h3 className="text-lg font-bold text-white m-0">Insights Estratégicos</h3>
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white m-0">Insights Estratégicos</h3>
                 </div>
-                <div className="text-white/80 whitespace-pre-wrap leading-relaxed">
+                <div className="text-zinc-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed">
                   {aiReport}
                 </div>
               </div>
               <div className="flex justify-end">
                 <button
                   onClick={() => setShowAIModal(false)}
-                  className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all font-bold uppercase tracking-widest text-[0.625rem]"
+                  className="px-6 py-2 bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-900 dark:text-white rounded-xl transition-all font-bold uppercase tracking-widest text-[0.625rem]"
                 >
                   Fechar
                 </button>
@@ -623,37 +624,37 @@ export default function Financial() {
       </Modal>
 
       {/* Heavy blur overlay for the background */}
-      <div className="absolute inset-0 bg-[#0a192f]/60 backdrop-blur-xl" />
+      <div className="absolute inset-0 bg-zinc-950/60 dark:bg-[#0a192f]/60 backdrop-blur-xl" />
       
       {/* Main Dashboard Container - Plastic Transparent Frosted Glass */}
-      <div className="relative z-10 w-full max-w-[1400px] bg-gradient-to-br from-[#1a2b4c]/90 to-[#0f172a]/90 backdrop-blur-2xl border border-white/20 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] p-6 md:p-8 flex flex-col gap-6 overflow-hidden">
+      <div className="relative z-10 w-full max-w-[1400px] bg-white/80 dark:bg-gradient-to-br dark:from-[#1a2b4c]/90 dark:to-[#0f172a]/90 backdrop-blur-2xl border border-zinc-200 dark:border-white/20 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] p-6 md:p-8 flex flex-col gap-6 overflow-hidden">
         
         {/* Subtle inner glow */}
         <div className="absolute inset-0 rounded-[2rem] shadow-[inset_0_0_30px_rgba(255,255,255,0.05)] pointer-events-none" />
 
-        <header className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10 border-b border-white/10 pb-6">
+        <header className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10 border-b border-zinc-100 dark:border-white/10 pb-6">
           <div className="flex items-center gap-8">
-            <BackButton className="!bg-white/5 !border-white/5 !rounded-3xl hover:!bg-white/10" />
+            <BackButton className="!bg-zinc-100 dark:!bg-white/5 !border-zinc-200 dark:!border-white/5 !rounded-3xl hover:!bg-zinc-200 dark:hover:!bg-white/10" />
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-                <span className="text-[0.625rem] font-black uppercase tracking-[0.4em] text-cyan-400/60">Live Financial Intelligence</span>
+                <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                <span className="text-[0.625rem] font-black uppercase tracking-[0.4em] text-cyan-500/60">Live Financial Intelligence</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white leading-none">Financeiro</h1>
-              <p className="text-sm text-white/40 mt-2 font-light max-w-md leading-relaxed">Análise preditiva e controle de fluxo de caixa em tempo real.</p>
+              <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-zinc-900 dark:text-white leading-none">Financeiro</h1>
+              <p className="text-sm text-zinc-500 dark:text-white/40 mt-2 font-light max-w-md leading-relaxed">Análise preditiva e controle de fluxo de caixa em tempo real.</p>
             </div>
           </div>
 
-          <div className="flex bg-white/5 p-1 rounded-2xl backdrop-blur-md border border-white/10 ml-8">
+          <div className="flex bg-zinc-100 dark:bg-white/5 p-1 rounded-2xl backdrop-blur-md border border-zinc-200 dark:border-white/10 ml-8">
             <button 
               onClick={() => setActiveTab('DASHBOARD')}
-              className={`px-6 py-3 rounded-xl transition-all flex items-center gap-2 text-[0.625rem] font-black uppercase tracking-widest ${activeTab === 'DASHBOARD' ? 'bg-white/10 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+              className={`px-6 py-3 rounded-xl transition-all flex items-center gap-2 text-[0.625rem] font-black uppercase tracking-widest ${activeTab === 'DASHBOARD' ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg' : 'text-zinc-400 dark:text-white/40 hover:text-zinc-900 dark:hover:text-white'}`}
             >
               <BarChart3 className="w-4 h-4" /> Dashboard
             </button>
             <button 
               onClick={() => setActiveTab('REPORTS')}
-              className={`px-6 py-3 rounded-xl transition-all flex items-center gap-2 text-[0.625rem] font-black uppercase tracking-widest ${activeTab === 'REPORTS' ? 'bg-white/10 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+              className={`px-6 py-3 rounded-xl transition-all flex items-center gap-2 text-[0.625rem] font-black uppercase tracking-widest ${activeTab === 'REPORTS' ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-lg' : 'text-zinc-400 dark:text-white/40 hover:text-zinc-900 dark:hover:text-white'}`}
             >
               <FileSpreadsheet className="w-4 h-4" /> Relatórios
             </button>
@@ -672,7 +673,7 @@ export default function Financial() {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               htmlFor="csv-upload-financial"
-              className="bg-white/5 hover:bg-white/10 text-white/60 hover:text-white px-6 py-3 flex items-center gap-2 border border-white/10 backdrop-blur-2xl transition-all cursor-pointer rounded-2xl font-bold uppercase tracking-widest text-[0.625rem]"
+              className="bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white px-6 py-3 flex items-center gap-2 border border-zinc-200 dark:border-white/10 backdrop-blur-2xl transition-all cursor-pointer rounded-2xl font-bold uppercase tracking-widest text-[0.625rem]"
             >
               <FileSpreadsheet className="w-4 h-4" /> 
               <span>Importar</span>
@@ -737,19 +738,19 @@ export default function Financial() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-cyan-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Receitas Totais</h3>
-            <div className="p-2 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Receitas Totais</h3>
+            <div className="p-2 bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 rounded-xl border border-cyan-500/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black text-white tracking-tighter mb-2">
+          <p className="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter mb-2">
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalIncome)}
           </p>
-          <div className="flex items-center gap-2 text-cyan-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
             <ArrowUpRight className="w-2 h-2" />
             <span>+12.5% vs last month</span>
           </div>
@@ -759,19 +760,19 @@ export default function Financial() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-rose-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Despesas Totais</h3>
-            <div className="p-2 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Despesas Totais</h3>
+            <div className="p-2 bg-rose-500/10 text-rose-500 dark:text-rose-400 rounded-xl border border-rose-500/20">
               <TrendingDown className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black text-white tracking-tighter mb-2">
+          <p className="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter mb-2">
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalCosts)}
           </p>
-          <div className="flex items-center gap-2 text-rose-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
             <ArrowDownRight className="w-2 h-2" />
             <span>-4.2% optimized</span>
           </div>
@@ -781,19 +782,19 @@ export default function Financial() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Saldo Líquido</h3>
-            <div className={`p-2 rounded-xl border ${balance >= 0 ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-orange-500/10 text-orange-400 border-orange-500/20'}`}>
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Saldo Líquido</h3>
+            <div className={`p-2 rounded-xl border ${balance >= 0 ? 'bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 border-cyan-500/20' : 'bg-orange-500/10 text-orange-500 dark:text-orange-400 border-orange-500/20'}`}>
               <Wallet className="w-4 h-4" />
             </div>
           </div>
-          <p className={`text-2xl font-black tracking-tighter mb-2 ${balance >= 0 ? 'text-white' : 'text-orange-400'}`}>
+          <p className={`text-2xl font-black tracking-tighter mb-2 ${balance >= 0 ? 'text-zinc-900 dark:text-white' : 'text-orange-500 dark:text-orange-400'}`}>
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(balance)}
           </p>
-          <div className="flex items-center gap-2 text-white/20 text-[0.5rem] font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-zinc-400 dark:text-white/20 text-[0.5rem] font-bold uppercase tracking-widest">
             <ShieldCheck className="w-2 h-2" />
             <span>Healthy Cashflow</span>
           </div>
@@ -803,12 +804,12 @@ export default function Financial() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Margem Operacional</h3>
-            <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Margem Operacional</h3>
+            <div className="p-2 bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 rounded-xl border border-emerald-500/20">
               <BarChart3 className="w-4 h-4" />
             </div>
           </div>
@@ -821,7 +822,7 @@ export default function Financial() {
                   cy="50"
                   r="40"
                   fill="transparent"
-                  stroke="rgba(255,255,255,0.05)"
+                  stroke="rgba(0,0,0,0.05)"
                   strokeWidth="8"
                 />
                 <motion.circle
@@ -839,12 +840,12 @@ export default function Financial() {
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-black text-white">{profitMargin.toFixed(0)}%</span>
+                <span className="text-sm font-black text-zinc-900 dark:text-white">{profitMargin.toFixed(0)}%</span>
               </div>
             </div>
             <div>
-              <p className="text-[0.5rem] font-black text-white/40 uppercase tracking-widest mb-0.5">Status</p>
-              <p className="text-xs font-bold text-emerald-400 uppercase tracking-tighter">Excelente</p>
+              <p className="text-[0.5rem] font-black text-zinc-400 dark:text-white/40 uppercase tracking-widest mb-0.5">Status</p>
+              <p className="text-xs font-bold text-emerald-500 dark:text-emerald-400 uppercase tracking-tighter">Excelente</p>
             </div>
           </div>
         </motion.div>
@@ -853,19 +854,19 @@ export default function Financial() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-cyan-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Contas a Receber</h3>
-            <div className="p-2 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Contas a Receber</h3>
+            <div className="p-2 bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 rounded-xl border border-cyan-500/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black tracking-tighter mb-2 text-white">
+          <p className="text-2xl font-black tracking-tighter mb-2 text-zinc-900 dark:text-white">
             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(accountsReceivable)}
           </p>
-          <div className="flex items-center gap-2 text-cyan-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400/60 text-[0.5rem] font-bold uppercase tracking-widest">
             <ArrowUpRight className="w-2 h-2" />
             <span>Previsão de entrada</span>
           </div>
@@ -876,7 +877,7 @@ export default function Financial() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
           whileHover={{ y: -5, scale: 1.02 }}
-          className="bg-white/5 rounded-[2.5rem] p-6 border border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group cursor-pointer"
+          className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-6 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl relative overflow-hidden group cursor-pointer"
           onClick={() => {
             const element = document.getElementById('metas-section');
             element?.scrollIntoView({ behavior: 'smooth' });
@@ -884,20 +885,20 @@ export default function Financial() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[50px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-amber-500/20 transition-all duration-700" />
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Metas Ativas</h3>
-            <div className="p-2 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+            <h3 className="text-zinc-400 dark:text-white/30 font-black uppercase tracking-[0.2em] text-[0.625rem]">Metas Ativas</h3>
+            <div className="p-2 bg-amber-500/10 text-amber-500 dark:text-amber-400 rounded-xl border border-amber-500/20">
               <Target className="w-4 h-4" />
             </div>
           </div>
-          <p className="text-2xl font-black tracking-tighter mb-2 text-white">
+          <p className="text-2xl font-black tracking-tighter mb-2 text-zinc-900 dark:text-white">
             {savingsGoals.length}
           </p>
           <div className="space-y-2">
-            <div className="flex justify-between text-[0.5rem] font-bold text-white/40 uppercase tracking-wider">
+            <div className="flex justify-between text-[0.5rem] font-bold text-zinc-400 dark:text-white/40 uppercase tracking-wider">
               <span>Progresso</span>
               <span>{Math.round((savingsGoals.reduce((acc, g) => acc + g.currentAmount, 0) / (savingsGoals.reduce((acc, g) => acc + g.targetAmount, 0) || 1)) * 100)}%</span>
             </div>
-            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+            <div className="h-1 bg-zinc-200 dark:bg-white/5 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-amber-500 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"
                 style={{ width: `${Math.round((savingsGoals.reduce((acc, g) => acc + g.currentAmount, 0) / (savingsGoals.reduce((acc, g) => acc + g.targetAmount, 0) || 1)) * 100)}%` }}
@@ -912,24 +913,24 @@ export default function Financial() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-amber-500/20 rounded-2xl border border-amber-500/30">
-              <Target className="w-6 h-6 text-amber-400" />
+              <Target className="w-6 h-6 text-amber-500 dark:text-amber-400" />
             </div>
             <div>
-              <h2 className="text-3xl font-black text-white tracking-tight">Metas e Projetos</h2>
-              <p className="text-sm text-white/40 font-medium">Acompanhe seus objetivos financeiros de longo prazo.</p>
+              <h2 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tight">Metas e Projetos</h2>
+              <p className="text-sm text-zinc-500 dark:text-white/40 font-medium">Acompanhe seus objetivos financeiros de longo prazo.</p>
             </div>
           </div>
           <motion.button 
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsAddingGoal(true)}
-            className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 px-8 py-4 rounded-2xl flex items-center gap-3 border border-amber-500/30 transition-all font-black uppercase text-xs tracking-widest shadow-lg shadow-amber-500/10"
+            className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-600 dark:text-amber-400 px-8 py-4 rounded-2xl flex items-center gap-3 border border-amber-500/30 transition-all font-black uppercase text-xs tracking-widest shadow-lg shadow-amber-500/10"
           >
             <Plus className="w-5 h-5" />
             Nova Meta
           </motion.button>
         </div>
-        <div className="bg-white/5 backdrop-blur-3xl rounded-[2.5rem] p-8 border border-white/10 shadow-2xl">
+        <div className="bg-zinc-100 dark:bg-white/5 backdrop-blur-3xl rounded-[2.5rem] p-8 border border-zinc-200 dark:border-white/10 shadow-2xl">
           <SavingsMirror 
             goals={savingsGoals} 
             showAll={true} 
@@ -1046,21 +1047,21 @@ export default function Financial() {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-8 bg-white/5 rounded-[3rem] p-10 border border-white/10 shadow-2xl backdrop-blur-3xl"
+            className="lg:col-span-8 bg-zinc-100 dark:bg-white/5 rounded-[3rem] p-10 border border-zinc-200 dark:border-white/10 shadow-2xl backdrop-blur-3xl"
           >
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-black text-white tracking-tighter">Fluxo de Caixa</h2>
-                <p className="text-white/40 text-sm font-medium mt-1">Análise comparativa de entradas e saídas.</p>
+                <h2 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tighter">Fluxo de Caixa</h2>
+                <p className="text-zinc-500 dark:text-white/40 text-sm font-medium mt-1">Análise comparativa de entradas e saídas.</p>
               </div>
               <div className="flex gap-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-white/40">Receitas</span>
+                  <div className="w-3 h-3 rounded-full bg-cyan-500 dark:bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">Receitas</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]" />
-                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-white/40">Despesas</span>
+                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">Despesas</span>
                 </div>
               </div>
             </div>
@@ -1077,18 +1078,20 @@ export default function Financial() {
                       <stop offset="95%" stopColor="#f43f5e" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.03)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-zinc-200 dark:text-white/5" />
                   <XAxis 
                     dataKey="name" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: '0.625rem', fontWeight: 900 }} 
+                    tick={{ fill: 'currentColor', fontSize: '0.625rem', fontWeight: 900 }} 
+                    className="text-zinc-400 dark:text-white/30"
                     dy={20}
                   />
                   <YAxis 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: '0.625rem', fontWeight: 900 }} 
+                    tick={{ fill: 'currentColor', fontSize: '0.625rem', fontWeight: 900 }} 
+                    className="text-zinc-400 dark:text-white/30"
                     tickFormatter={(value) => `R$ ${value/1000}k`}
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -1142,8 +1145,8 @@ export default function Financial() {
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-white/20">Total</span>
-                  <span className="text-2xl font-black text-white tracking-tighter">
+                  <span className="text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/20">Total</span>
+                  <span className="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter">
                     {new Intl.NumberFormat('pt-BR', { notation: 'compact' }).format(totalCosts)}
                   </span>
                 </div>
@@ -1154,13 +1157,13 @@ export default function Financial() {
                   <div key={cat.name} className="flex items-center justify-between group cursor-default">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]" style={{ color: COLORS[index % COLORS.length], backgroundColor: COLORS[index % COLORS.length] }} />
-                      <span className="text-xs text-white/40 font-black uppercase tracking-widest group-hover:text-white transition-colors">{cat.name}</span>
+                      <span className="text-xs text-zinc-500 dark:text-white/40 font-black uppercase tracking-widest group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">{cat.name}</span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="w-24 bg-white/5 h-1 rounded-full overflow-hidden">
+                      <div className="w-24 bg-zinc-200 dark:bg-white/5 h-1 rounded-full overflow-hidden">
                         <div className="h-full transition-all duration-1000" style={{ width: `${(cat.value / totalCosts) * 100}%`, backgroundColor: COLORS[index % COLORS.length] }} />
                       </div>
-                      <span className="text-xs font-black text-white w-10 text-right">
+                      <span className="text-xs font-black text-zinc-900 dark:text-white w-10 text-right">
                         {((cat.value / totalCosts) * 100).toFixed(0)}%
                       </span>
                     </div>
@@ -1179,14 +1182,15 @@ export default function Financial() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topClients} layout="vertical" margin={{ top: 0, right: 30, left: 40, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="rgba(255,255,255,0.03)" />
+                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="currentColor" className="text-zinc-200 dark:text-white/5" />
                   <XAxis type="number" hide />
                   <YAxis 
                     dataKey="name" 
                     type="category" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: '0.625rem', fontWeight: 900 }} 
+                    tick={{ fill: 'currentColor', fontSize: '0.625rem', fontWeight: 900 }} 
+                    className="text-zinc-400 dark:text-white/40"
                     width={100} 
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -1215,17 +1219,19 @@ export default function Financial() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={monthlyData} margin={{ top: 0, right: 20, left: 0, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.03)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-zinc-200 dark:text-white/5" />
                   <XAxis 
                     dataKey="name" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: '0.625rem', fontWeight: 900 }} 
+                    tick={{ fill: 'currentColor', fontSize: '0.625rem', fontWeight: 900 }} 
+                    className="text-zinc-400 dark:text-white/30"
                   />
                   <YAxis 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: 'rgba(255,255,255,0.3)', fontSize: '0.625rem', fontWeight: 900 }} 
+                    tick={{ fill: 'currentColor', fontSize: '0.625rem', fontWeight: 900 }} 
+                    className="text-zinc-400 dark:text-white/30"
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line 
@@ -1267,8 +1273,8 @@ export default function Financial() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <span className="text-[0.625rem] font-black text-white/20 uppercase tracking-[0.2em]">Total</span>
-                <span className="text-2xl font-black text-white">
+                <span className="text-[0.625rem] font-black text-zinc-400 dark:text-white/20 uppercase tracking-[0.2em]">Total</span>
+                <span className="text-2xl font-black text-zinc-900 dark:text-white">
                   {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(totalCosts)}
                 </span>
               </div>
@@ -1279,8 +1285,8 @@ export default function Financial() {
                 <div key={entry.name} className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
                   <div className="flex flex-col">
-                    <span className="text-[0.625rem] font-black text-white/40 uppercase tracking-widest">{entry.name}</span>
-                    <span className="text-xs font-bold text-white">
+                    <span className="text-[0.625rem] font-black text-zinc-500 dark:text-white/40 uppercase tracking-widest">{entry.name}</span>
+                    <span className="text-xs font-bold text-zinc-900 dark:text-white">
                       {((entry.value / totalCosts) * 100).toFixed(1)}%
                     </span>
                   </div>
@@ -1295,14 +1301,14 @@ export default function Financial() {
       <div className="relative z-10 mb-16">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-black text-white tracking-tighter">Metas e Projetos</h2>
-            <p className="text-white/40 text-sm font-medium mt-1">Acompanhamento de objetivos financeiros.</p>
+            <h2 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tighter">Metas e Projetos</h2>
+            <p className="text-zinc-500 dark:text-white/40 text-sm font-medium mt-1">Acompanhamento de objetivos financeiros.</p>
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsAddingGoal(true)}
-            className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all"
+            className="p-3 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl text-zinc-400 dark:text-white/40 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-500/10 transition-all"
           >
             <Plus className="w-5 h-5" />
           </motion.button>
@@ -1316,12 +1322,12 @@ export default function Financial() {
                 key={goal.id}
                 className="relative group overflow-hidden"
               >
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity text-zinc-900 dark:text-white">
                   <Target className="w-24 h-24" />
                 </div>
 
                 <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div className="p-4 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <div className="p-4 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                     <Target className="w-6 h-6" />
                   </div>
                   <div className="flex gap-2">
@@ -1330,21 +1336,21 @@ export default function Financial() {
                         setSelectedGoalId(goal.id);
                         setIsAddingMoneyToGoal(true);
                       }}
-                      className="p-3 text-emerald-400 hover:bg-emerald-500/20 rounded-xl transition-all border border-emerald-500/20"
+                      className="p-3 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 rounded-xl transition-all border border-emerald-500/20"
                       title="Adicionar Dinheiro"
                     >
                       <Plus className="w-5 h-5" />
                     </button>
                     <button 
                       onClick={() => handleEdit('goal', goal.id)}
-                      className="p-3 text-cyan-400 hover:bg-cyan-500/20 rounded-xl transition-all border border-cyan-500/20"
+                      className="p-3 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 rounded-xl transition-all border border-cyan-500/20"
                       title="Editar Meta"
                     >
                       <Plus className="w-5 h-5 rotate-45" />
                     </button>
                     <button 
                       onClick={() => handleDelete('goal', goal.id)}
-                      className="p-3 text-rose-400 hover:bg-rose-500/20 rounded-xl transition-all border border-rose-500/20"
+                      className="p-3 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 rounded-xl transition-all border border-rose-500/20"
                       title="Excluir Meta"
                     >
                       <Trash2 className="w-5 h-5" />
@@ -1352,24 +1358,24 @@ export default function Financial() {
                   </div>
                 </div>
 
-                <h3 className="text-xl font-black text-white mb-2 relative z-10">{goal.title}</h3>
-                <p className="text-white/40 text-[0.625rem] font-black uppercase tracking-widest mb-6 relative z-10">{goal.category}</p>
+                <h3 className="text-xl font-black text-zinc-900 dark:text-white mb-2 relative z-10">{goal.title}</h3>
+                <p className="text-zinc-500 dark:text-white/40 text-[0.625rem] font-black uppercase tracking-widest mb-6 relative z-10">{goal.category}</p>
 
                 <div className="space-y-4 relative z-10">
                   <div className="flex justify-between items-end">
                     <div className="flex flex-col">
-                      <span className="text-[0.625rem] font-black text-white/20 uppercase tracking-widest">Progresso</span>
-                      <span className="text-2xl font-black text-white">{progress.toFixed(1)}%</span>
+                      <span className="text-[0.625rem] font-black text-zinc-400 dark:text-white/20 uppercase tracking-widest">Progresso</span>
+                      <span className="text-2xl font-black text-zinc-900 dark:text-white">{progress.toFixed(1)}%</span>
                     </div>
                     <div className="flex flex-col items-end">
-                      <span className="text-[0.625rem] font-black text-white/20 uppercase tracking-widest">Alvo</span>
-                      <span className="text-sm font-bold text-white/60">
+                      <span className="text-[0.625rem] font-black text-zinc-400 dark:text-white/20 uppercase tracking-widest">Alvo</span>
+                      <span className="text-sm font-bold text-zinc-500 dark:text-white/60">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(goal.targetAmount)}
                       </span>
                     </div>
                   </div>
 
-                  <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
+                  <div className="h-3 w-full bg-zinc-200 dark:bg-white/5 rounded-full overflow-hidden p-0.5 border border-zinc-300 dark:border-white/5">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${progress}%` }}
@@ -1378,12 +1384,12 @@ export default function Financial() {
                     />
                   </div>
 
-                  <div className="flex justify-between items-center text-[0.625rem] font-black uppercase tracking-widest text-white/30 pt-4">
+                  <div className="flex justify-between items-center text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/30 pt-4">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-3 h-3" />
                       <span>{safeFormatDate(goal.deadline) || 'Sem prazo'}</span>
                     </div>
-                    <span className={`px-3 py-1 rounded-full border ${goal.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
+                    <span className={`px-3 py-1 rounded-full border ${goal.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'}`}>
                       {goal.status === 'COMPLETED' ? 'Concluído' : 'Em Andamento'}
                     </span>
                   </div>
@@ -1393,10 +1399,10 @@ export default function Financial() {
           })}
 
           {savingsGoals.length === 0 && (
-            <div className="col-span-full py-20 text-center bg-white/5 rounded-[3rem] border border-dashed border-white/10 backdrop-blur-3xl">
-              <Target className="w-12 h-12 text-white/10 mx-auto mb-6" />
-              <h3 className="text-2xl font-black text-white/20 tracking-tighter">Nenhuma meta definida</h3>
-              <p className="text-white/10 mt-2 font-bold uppercase tracking-widest text-[0.625rem]">Defina seus objetivos financeiros para começar a poupar.</p>
+            <div className="col-span-full py-20 text-center bg-zinc-100 dark:bg-white/5 rounded-[3rem] border border-dashed border-zinc-200 dark:border-white/10 backdrop-blur-3xl">
+              <Target className="w-12 h-12 text-zinc-300 dark:text-white/10 mx-auto mb-6" />
+              <h3 className="text-2xl font-black text-zinc-300 dark:text-white/20 tracking-tighter">Nenhuma meta definida</h3>
+              <p className="text-zinc-400 dark:text-white/10 mt-2 font-bold uppercase tracking-widest text-[0.625rem]">Defina seus objetivos financeiros para começar a poupar.</p>
             </div>
           )}
         </div>
@@ -1406,11 +1412,11 @@ export default function Financial() {
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-12">
           <div>
-            <h2 className="text-4xl font-black text-white tracking-tighter">Transações Recentes</h2>
-            <p className="text-white/40 text-sm font-medium mt-1">Detalhamento granular de cada movimentação.</p>
+            <h2 className="text-4xl font-black text-zinc-900 dark:text-white tracking-tighter">Transações Recentes</h2>
+            <p className="text-zinc-500 dark:text-white/40 text-sm font-medium mt-1">Detalhamento granular de cada movimentação.</p>
           </div>
           <div className="flex gap-4">
-             <div className="px-6 py-3 bg-white/5 border border-white/10 rounded-2xl text-[0.625rem] font-black uppercase tracking-widest text-white/40">
+             <div className="px-6 py-3 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl text-[0.625rem] font-black uppercase tracking-widest text-zinc-400 dark:text-white/40">
                Total: {transactions.length}
              </div>
           </div>
@@ -1423,27 +1429,27 @@ export default function Financial() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.02 }}
-              className="bg-white/5 rounded-[2.5rem] p-8 border border-white/10 flex flex-col relative group hover:bg-white/10 transition-all duration-500 shadow-xl backdrop-blur-3xl overflow-hidden"
+              className="bg-zinc-100 dark:bg-white/5 rounded-[2.5rem] p-8 border border-zinc-200 dark:border-white/10 flex flex-col relative group hover:bg-zinc-200 dark:hover:bg-white/10 transition-all duration-500 shadow-xl backdrop-blur-3xl overflow-hidden"
             >
-              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity text-zinc-900 dark:text-white">
                 {t.type === 'income' ? <ArrowUpRight className="w-24 h-24" /> : <ArrowDownRight className="w-24 h-24" />}
               </div>
               
               <div className="flex justify-between items-start mb-8 relative z-10">
-                <div className={`p-4 rounded-2xl border ${t.type === 'income' ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'}`}>
+                <div className={`p-4 rounded-2xl border ${t.type === 'income' ? 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'}`}>
                   {t.type === 'income' ? <ArrowUpRight className="w-6 h-6" /> : <ArrowDownRight className="w-6 h-6" />}
                 </div>
                 <div className="flex gap-2">
                   <button 
                     onClick={() => handleEdit(t.type === 'income' ? 'income' : 'cost', t.id)}
-                    className="p-3 text-white/20 hover:text-cyan-400 hover:bg-cyan-500/20 rounded-xl transition-all opacity-0 group-hover:opacity-100"
+                    className="p-3 text-zinc-400 dark:text-white/20 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-cyan-500/20 rounded-xl transition-all opacity-0 group-hover:opacity-100"
                     title="Editar"
                   >
                     <Plus className="w-5 h-5 rotate-45" />
                   </button>
                   <button 
                     onClick={() => handleDelete(t.type === 'income' ? 'income' : 'cost', t.id)}
-                    className="p-3 text-white/20 hover:text-rose-400 hover:bg-rose-500/20 rounded-xl transition-all opacity-0 group-hover:opacity-100"
+                    className="p-3 text-zinc-400 dark:text-white/20 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-500/20 rounded-xl transition-all opacity-0 group-hover:opacity-100"
                     title="Excluir"
                   >
                     <Trash2 className="w-5 h-5" />
@@ -1451,18 +1457,18 @@ export default function Financial() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-black text-white mb-2 line-clamp-2 relative z-10 group-hover:text-cyan-400 transition-colors">{t.description}</h3>
+              <h3 className="text-xl font-black text-zinc-900 dark:text-white mb-2 line-clamp-2 relative z-10 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{t.description}</h3>
               
-              <p className={`text-3xl font-black mb-8 relative z-10 ${t.type === 'income' ? 'text-white' : 'text-rose-400'}`}>
+              <p className={`text-3xl font-black mb-8 relative z-10 ${t.type === 'income' ? 'text-zinc-900 dark:text-white' : 'text-rose-600 dark:text-rose-400'}`}>
                 {t.type === 'income' ? '+' : '-'} {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(t.value)}
               </p>
               
               <div className="mt-auto flex justify-between items-center text-[0.625rem] font-black uppercase tracking-widest relative z-10">
-                <div className="flex items-center gap-2 text-white/30">
+                <div className="flex items-center gap-2 text-zinc-400 dark:text-white/30">
                   <Calendar className="w-3 h-3" />
                   <span>{safeFormatDate(t.date)}</span>
                 </div>
-                <span className={`px-4 py-1.5 rounded-full border ${t.type === 'income' ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'}`}>
+                <span className={`px-4 py-1.5 rounded-full border ${t.type === 'income' ? 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'}`}>
                   {t.type === 'income' ? 'Receita' : (t as Cost).category}
                 </span>
               </div>
@@ -1471,12 +1477,12 @@ export default function Financial() {
           ))}
           
           {transactions.length === 0 && (
-            <div className="col-span-full py-32 text-center bg-white/5 rounded-[3rem] border border-dashed border-white/10 backdrop-blur-3xl">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-white/5 rounded-full mb-8">
-                <DollarSign className="w-12 h-12 text-white/10" />
+            <div className="col-span-full py-32 text-center bg-zinc-100 dark:bg-white/5 rounded-[3rem] border border-dashed border-zinc-200 dark:border-white/10 backdrop-blur-3xl">
+              <div className="inline-flex items-center justify-center w-24 h-24 bg-zinc-200 dark:bg-white/5 rounded-full mb-8">
+                <DollarSign className="w-12 h-12 text-zinc-300 dark:text-white/10" />
               </div>
-              <h3 className="text-3xl font-black text-white/20 tracking-tighter">Nenhuma transação registrada</h3>
-              <p className="text-white/10 mt-4 font-bold uppercase tracking-widest text-xs">Aguardando dados para processamento...</p>
+              <h3 className="text-3xl font-black text-zinc-300 dark:text-white/20 tracking-tighter">Nenhuma transação registrada</h3>
+              <p className="text-zinc-400 dark:text-white/10 mt-4 font-bold uppercase tracking-widest text-xs">Aguardando dados para processamento...</p>
             </div>
           )}
         </div>
@@ -1498,69 +1504,69 @@ export default function Financial() {
           {editingTransaction?.type === 'goal' ? (
             <>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Título da Meta *</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Título da Meta *</label>
                 <input 
                   type="text" 
                   value={goalTitle}
                   onChange={(e) => setGoalTitle(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
                   required
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor Alvo *</label>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor Alvo *</label>
                   <input 
                     type="number" 
                     value={goalTarget || ''}
                     onChange={(e) => setGoalTarget(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white"
+                    className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor Atual</label>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor Atual</label>
                   <input 
                     type="number" 
                     value={goalCurrent || ''}
                     onChange={(e) => setGoalCurrent(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white"
+                    className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Prazo</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Prazo</label>
                 <input 
                   type="date" 
                   value={goalDeadline}
                   onChange={(e) => setGoalDeadline(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white [color-scheme:dark]"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white dark:[color-scheme:dark]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Categoria</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Categoria</label>
                 <select 
                   value={goalCategory}
                   onChange={(e) => setGoalCategory(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
                 >
-                  <option value="Reserva" className="bg-[#004a7c]">Reserva</option>
-                  <option value="Investimento" className="bg-[#004a7c]">Investimento</option>
-                  <option value="Projeto" className="bg-[#004a7c]">Projeto</option>
-                  <option value="Viagem" className="bg-[#004a7c]">Viagem</option>
-                  <option value="Outros" className="bg-[#004a7c]">Outros</option>
+                  <option value="Reserva" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Reserva</option>
+                  <option value="Investimento" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Investimento</option>
+                  <option value="Projeto" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Projeto</option>
+                  <option value="Viagem" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Viagem</option>
+                  <option value="Outros" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Outros</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Status</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Status</label>
                 <select 
                   value={goalStatus}
                   onChange={(e) => setGoalStatus(e.target.value as any)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
                 >
-                  <option value="IN_PROGRESS" className="bg-[#004a7c]">Em Andamento</option>
-                  <option value="COMPLETED" className="bg-[#004a7c]">Concluído</option>
-                  <option value="CANCELLED" className="bg-[#004a7c]">Cancelado</option>
+                  <option value="IN_PROGRESS" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Em Andamento</option>
+                  <option value="COMPLETED" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Concluído</option>
+                  <option value="CANCELLED" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Cancelado</option>
                 </select>
               </div>
             </>
@@ -1568,41 +1574,41 @@ export default function Financial() {
             <>
               {editingTransaction?.type === 'income' && (
                 <div>
-                  <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Cliente *</label>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Cliente *</label>
                   <select 
                     value={clientId}
                     onChange={(e) => setClientId(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+                    className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
                     required
                   >
-                    <option value="" className="bg-[#004a7c]">Selecione um cliente</option>
+                    <option value="" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Selecione um cliente</option>
                     {clients.map(c => (
-                      <option key={c.id} value={c.id} className="bg-[#004a7c]">{c.name}</option>
+                      <option key={c.id} value={c.id} className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">{c.name}</option>
                     ))}
                   </select>
                 </div>
               )}
 
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Descrição *</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Descrição *</label>
                 <input 
                   type="text" 
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor (R$) *</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor (R$) *</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
                   <input 
                     type="number" 
                     value={value || ''}
                     onChange={(e) => setValue(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                    className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                     min="0.01"
                     step="0.01"
                     required
@@ -1611,29 +1617,29 @@ export default function Financial() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Data *</label>
+                <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Data *</label>
                 <input 
                   type="date" 
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white [color-scheme:dark]"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white dark:[color-scheme:dark]"
                   required
                 />
               </div>
 
               {editingTransaction?.type === 'cost' && (
                 <div>
-                  <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Categoria</label>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Categoria</label>
                   <select 
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+                    className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-cyan-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
                   >
-                    <option value="Material" className="bg-[#004a7c]">Material</option>
-                    <option value="Combustível" className="bg-[#004a7c]">Combustível</option>
-                    <option value="Alimentação" className="bg-[#004a7c]">Alimentação</option>
-                    <option value="Ferramentas" className="bg-[#004a7c]">Ferramentas</option>
-                    <option value="Outros" className="bg-[#004a7c]">Outros</option>
+                    <option value="Material" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Material</option>
+                    <option value="Combustível" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Combustível</option>
+                    <option value="Alimentação" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Alimentação</option>
+                    <option value="Ferramentas" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Ferramentas</option>
+                    <option value="Outros" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Outros</option>
                   </select>
                 </div>
               )}
@@ -1644,13 +1650,13 @@ export default function Financial() {
             <button 
               type="button"
               onClick={() => setEditingTransaction(null)}
-              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 px-10 py-3 rounded-xl font-bold border border-cyan-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-600 dark:text-cyan-400 px-10 py-3 rounded-xl font-bold border border-cyan-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               Salvar Alterações
             </button>
@@ -1668,12 +1674,12 @@ export default function Financial() {
       >
         <form onSubmit={handleAddGoal} className="space-y-6 p-2">
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Título da Meta *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Título da Meta *</label>
             <input 
               type="text" 
               value={goalTitle}
               onChange={(e) => setGoalTitle(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
               placeholder="Ex: Reserva de Emergência"
               required
             />
@@ -1681,14 +1687,14 @@ export default function Financial() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor Alvo *</label>
+              <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor Alvo *</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
                 <input 
                   type="number" 
                   value={goalTarget || ''}
                   onChange={(e) => setGoalTarget(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                   min="0.01"
                   step="0.01"
                   required
@@ -1696,14 +1702,14 @@ export default function Financial() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor Inicial</label>
+              <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor Inicial</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
                 <input 
                   type="number" 
                   value={goalCurrent || ''}
                   onChange={(e) => setGoalCurrent(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                  className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                   min="0"
                   step="0.01"
                 />
@@ -1712,27 +1718,27 @@ export default function Financial() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Prazo (Opcional)</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Prazo (Opcional)</label>
             <input 
               type="date" 
               value={goalDeadline}
               onChange={(e) => setGoalDeadline(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white [color-scheme:dark]"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white dark:[color-scheme:dark]"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Categoria</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Categoria</label>
             <select 
               value={goalCategory}
               onChange={(e) => setGoalCategory(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
             >
-              <option value="Reserva" className="bg-[#004a7c]">Reserva</option>
-              <option value="Investimento" className="bg-[#004a7c]">Investimento</option>
-              <option value="Projeto" className="bg-[#004a7c]">Projeto</option>
-              <option value="Viagem" className="bg-[#004a7c]">Viagem</option>
-              <option value="Outros" className="bg-[#004a7c]">Outros</option>
+              <option value="Reserva" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Reserva</option>
+              <option value="Investimento" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Investimento</option>
+              <option value="Projeto" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Projeto</option>
+              <option value="Viagem" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Viagem</option>
+              <option value="Outros" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Outros</option>
             </select>
           </div>
 
@@ -1740,13 +1746,13 @@ export default function Financial() {
             <button 
               type="button"
               onClick={() => setIsAddingGoal(false)}
-              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-600 dark:text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               CRIAR META
             </button>
@@ -1762,26 +1768,26 @@ export default function Financial() {
       >
         <form onSubmit={handleAddCost} className="space-y-6 p-2">
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Descrição *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Descrição *</label>
             <input 
               type="text" 
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-red-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
               placeholder="Ex: Compra de materiais..."
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor (R$) *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor (R$) *</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
               <input 
                 type="number" 
                 value={value || ''}
                 onChange={(e) => setValue(parseFloat(e.target.value) || 0)}
-                className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-red-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                 min="0.01"
                 step="0.01"
                 required
@@ -1790,28 +1796,28 @@ export default function Financial() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Data *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Data *</label>
             <input 
               type="date" 
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white [color-scheme:dark]"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-red-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white dark:[color-scheme:dark]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Categoria</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Categoria</label>
             <select 
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-red-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
             >
-              <option value="Material" className="bg-[#004a7c]">Material</option>
-              <option value="Combustível" className="bg-[#004a7c]">Combustível</option>
-              <option value="Alimentação" className="bg-[#004a7c]">Alimentação</option>
-              <option value="Ferramentas" className="bg-[#004a7c]">Ferramentas</option>
-              <option value="Outros" className="bg-[#004a7c]">Outros</option>
+              <option value="Material" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Material</option>
+              <option value="Combustível" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Combustível</option>
+              <option value="Alimentação" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Alimentação</option>
+              <option value="Ferramentas" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Ferramentas</option>
+              <option value="Outros" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Outros</option>
             </select>
           </div>
 
@@ -1819,13 +1825,13 @@ export default function Financial() {
             <button 
               type="button"
               onClick={() => setIsAddingCost(false)}
-              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-10 py-3 rounded-xl font-bold border border-red-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 px-10 py-3 rounded-xl font-bold border border-red-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               SALVAR CUSTO
             </button>
@@ -1843,41 +1849,41 @@ export default function Financial() {
       >
         <form onSubmit={handleAddIncome} className="space-y-6 p-2">
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Cliente *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Cliente *</label>
             <select 
               value={clientId}
               onChange={(e) => setClientId(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white appearance-none cursor-pointer"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white appearance-none cursor-pointer"
               required
             >
-              <option value="" className="bg-[#004a7c]">Selecione um cliente...</option>
+              <option value="" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Selecione um cliente...</option>
               {clients.map(c => (
-                <option key={c.id} value={c.id} className="bg-[#004a7c]">{c.name}</option>
+                <option key={c.id} value={c.id} className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">{c.name}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Descrição *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Descrição *</label>
             <input 
               type="text" 
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white placeholder:text-white/30"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-white/30"
               placeholder="Ex: Pagamento de serviço avulso..."
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor (R$) *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor (R$) *</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
               <input 
                 type="number" 
                 value={value || ''}
                 onChange={(e) => setValue(parseFloat(e.target.value) || 0)}
-                className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                 min="0.01"
                 step="0.01"
                 required
@@ -1886,12 +1892,12 @@ export default function Financial() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Data *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Data *</label>
             <input 
               type="date" 
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3 outline-none transition-all text-white [color-scheme:dark]"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl px-4 py-3 outline-none transition-all text-zinc-900 dark:text-white dark:[color-scheme:dark]"
               required
             />
           </div>
@@ -1900,13 +1906,13 @@ export default function Financial() {
             <button 
               type="button"
               onClick={() => setIsAddingIncome(false)}
-              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-600 dark:text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               SALVAR RECEITA
             </button>
@@ -1928,17 +1934,17 @@ export default function Financial() {
       >
         <form onSubmit={handleAddMoneyToGoal} className="space-y-6 p-2">
           <div>
-            <p className="text-white/60 text-sm mb-4">
-              Meta: <span className="text-white font-bold">{savingsGoals.find(g => g.id === selectedGoalId)?.title}</span>
+            <p className="text-zinc-500 dark:text-white/60 text-sm mb-4">
+              Meta: <span className="text-zinc-900 dark:text-white font-bold">{savingsGoals.find(g => g.id === selectedGoalId)?.title}</span>
             </p>
-            <label className="block text-sm font-bold uppercase tracking-wider text-white/60 mb-2">Valor a Adicionar (R$) *</label>
+            <label className="block text-sm font-bold uppercase tracking-wider text-zinc-500 dark:text-white/60 mb-2">Valor a Adicionar (R$) *</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">R$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/40 font-bold">R$</span>
               <input 
                 type="number" 
                 value={moneyToAdd || ''}
                 onChange={(e) => setMoneyToAdd(parseFloat(e.target.value) || 0)}
-                className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-white"
+                className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-emerald-500/50 rounded-xl pl-12 pr-4 py-3 outline-none transition-all text-zinc-900 dark:text-white"
                 min="0.01"
                 step="0.01"
                 required
@@ -1955,13 +1961,13 @@ export default function Financial() {
                 setMoneyToAdd(0);
                 setSelectedGoalId(null);
               }}
-              className="px-6 py-3 text-white/60 hover:text-white transition-colors font-medium"
+              className="px-6 py-3 text-zinc-500 dark:text-white/60 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium"
             >
               Cancelar
             </button>
             <button 
               type="submit"
-              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
+              className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-600 dark:text-emerald-400 px-10 py-3 rounded-xl font-bold border border-emerald-500/30 transition-all active:scale-95 shadow-lg backdrop-blur-md"
             >
               ADICIONAR
             </button>

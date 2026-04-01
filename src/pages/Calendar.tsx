@@ -457,12 +457,12 @@ export default function Calendar() {
       >
         <form onSubmit={handleSave} className="space-y-8">
           <div className="space-y-3">
-            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-white/30 ml-1">Título do Evento</label>
+            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-white/30 ml-1">Título do Evento</label>
             <input 
               type="text" 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg placeholder:text-white/10"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg placeholder:text-zinc-300 dark:placeholder:text-white/10"
               placeholder="Ex: Reunião de Planejamento"
               required
             />
@@ -470,39 +470,39 @@ export default function Calendar() {
 
           <div className="space-y-6">
             <div className="space-y-3">
-              <label className="block text-sm font-bold uppercase tracking-[0.2em] text-white/30 ml-1">Início</label>
+              <label className="block text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-white/30 ml-1">Início</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input 
                   type="date" 
                   value={startDate.split('T')[0]}
                   onChange={(e) => setStartDate(`${e.target.value}T${startDate.split('T')[1] || '09:00'}`)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg"
                   required
                 />
                 <input 
                   type="time" 
                   value={startDate.split('T')[1]}
                   onChange={(e) => setStartDate(`${startDate.split('T')[0]}T${e.target.value}`)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg"
                   required
                 />
               </div>
             </div>
             <div className="space-y-3">
-              <label className="block text-sm font-bold uppercase tracking-[0.2em] text-white/30 ml-1">Término</label>
+              <label className="block text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-white/30 ml-1">Término</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input 
                   type="date" 
                   value={endDate.split('T')[0]}
                   onChange={(e) => setEndDate(`${e.target.value}T${endDate.split('T')[1] || '10:00'}`)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg"
                   required
                 />
                 <input 
                   type="time" 
                   value={endDate.split('T')[1]}
                   onChange={(e) => setEndDate(`${endDate.split('T')[0]}T${e.target.value}`)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg"
+                  className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg"
                   required
                 />
               </div>
@@ -510,23 +510,23 @@ export default function Calendar() {
           </div>
 
           <div className="space-y-3">
-            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-white/30 ml-1">Categoria</label>
+            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-white/30 ml-1">Categoria</label>
             <select 
               value={type}
               onChange={(e) => setType(e.target.value as any)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg appearance-none cursor-pointer"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg appearance-none cursor-pointer"
             >
-              <option value="MEETING" className="bg-[#004a7c]">Reunião</option>
-              <option value="OTHER" className="bg-[#004a7c]">Outro</option>
+              <option value="MEETING" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Reunião</option>
+              <option value="OTHER" className="bg-white dark:bg-[#004a7c] text-zinc-900 dark:text-white">Outro</option>
             </select>
           </div>
 
           <div className="space-y-3">
-            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-white/30 ml-1">Observações</label>
+            <label className="block text-sm font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-white/30 ml-1">Observações</label>
             <textarea 
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-white text-lg min-h-[120px] resize-none placeholder:text-white/10"
+              className="w-full bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 focus:border-zinc-400 dark:focus:border-white/30 rounded-2xl px-6 py-4 outline-none transition-all text-zinc-900 dark:text-white text-lg min-h-[120px] resize-none placeholder:text-zinc-300 dark:placeholder:text-white/10"
               placeholder="Detalhes adicionais..."
             />
           </div>
@@ -535,13 +535,13 @@ export default function Calendar() {
             <button 
               type="button"
               onClick={() => setIsAdding(false)}
-              className="px-8 py-4 text-white/40 hover:text-white font-black tracking-widest transition-all uppercase text-xs"
+              className="px-8 py-4 text-zinc-400 dark:text-white/40 hover:text-zinc-900 dark:hover:text-white font-black tracking-widest transition-all uppercase text-xs"
             >
               CANCELAR
             </button>
             <button 
               type="submit"
-              className="bg-white/10 hover:bg-white/20 text-white px-12 py-4 rounded-2xl font-black tracking-widest border border-white/30 backdrop-blur-md transition-all active:scale-95 shadow-2xl"
+              className="bg-zinc-900 dark:bg-white/10 hover:bg-zinc-800 dark:hover:bg-white/20 text-white px-12 py-4 rounded-2xl font-black tracking-widest border border-zinc-800 dark:border-white/30 backdrop-blur-md transition-all active:scale-95 shadow-2xl"
             >
               SALVAR EVENTO
             </button>
@@ -568,8 +568,8 @@ export default function Calendar() {
                 <CalendarIcon className="w-10 h-10" />
               </div>
               <div>
-                <h3 className="text-3xl font-black text-white tracking-tight leading-tight">{selectedEvent.title}</h3>
-                <p className="text-xs font-black uppercase tracking-[0.3em] text-white/30 mt-3">
+                <h3 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tight leading-tight">{selectedEvent.title}</h3>
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-white/30 mt-3">
                   {selectedEvent.resource.type === 'TICKET' ? (selectedEvent.resource.ticketType === 'TAREFA' ? 'Tarefa' : 'Ordem de Serviço') : 
                    selectedEvent.resource.type === 'MEETING' ? 'Reunião' : 'Outro'}
                   {selectedEvent.resource.osNumber && ` • ${selectedEvent.resource.osNumber}`}
@@ -579,15 +579,15 @@ export default function Calendar() {
             </div>
             
             <div className="space-y-6">
-              <div className="flex items-center gap-6 text-white/80 bg-white/5 p-6 rounded-3xl border border-white/10 shadow-xl">
-                <Clock className="w-8 h-8 text-white/20 shrink-0" />
+              <div className="flex items-center gap-6 text-zinc-700 dark:text-white/80 bg-zinc-50 dark:bg-white/5 p-6 rounded-3xl border border-zinc-200 dark:border-white/10 shadow-xl">
+                <Clock className="w-8 h-8 text-zinc-300 dark:text-white/20 shrink-0" />
                 <div className="text-xl font-medium leading-tight">
                   {selectedEvent.allDay ? (
-                    <span className="font-black tracking-widest uppercase text-sm text-white/40">Dia Inteiro</span>
+                    <span className="font-black tracking-widest uppercase text-sm text-zinc-400 dark:text-white/40">Dia Inteiro</span>
                   ) : (
                     <div className="space-y-1">
                       <div>{format(selectedEvent.start, "dd/MM/yyyy 'às' HH:mm")}</div>
-                      <div className="text-xs font-black uppercase tracking-widest text-white/20">até</div>
+                      <div className="text-xs font-black uppercase tracking-widest text-zinc-300 dark:text-white/20">até</div>
                       <div>{format(selectedEvent.end, "dd/MM/yyyy 'às' HH:mm")}</div>
                     </div>
                   )}
@@ -595,18 +595,18 @@ export default function Calendar() {
               </div>
 
               {selectedEvent.resource.type === 'TICKET' && selectedEvent.resource.clientName && (
-                <div className="flex items-center gap-6 text-white/80 bg-white/5 p-6 rounded-3xl border border-white/10 shadow-xl">
-                  <User className="w-8 h-8 text-white/20 shrink-0" />
+                <div className="flex items-center gap-6 text-zinc-700 dark:text-white/80 bg-zinc-50 dark:bg-white/5 p-6 rounded-3xl border border-zinc-200 dark:border-white/10 shadow-xl">
+                  <User className="w-8 h-8 text-zinc-300 dark:text-white/20 shrink-0" />
                   <div>
-                    <p className="text-xs font-black uppercase tracking-widest text-white/20 mb-1">Cliente</p>
+                    <p className="text-xs font-black uppercase tracking-widest text-zinc-300 dark:text-white/20 mb-1">Cliente</p>
                     <p className="text-xl font-bold">{selectedEvent.resource.clientName}</p>
                   </div>
                 </div>
               )}
 
               {selectedEvent.resource.notes && (
-                <div className="flex items-start gap-6 text-white/80 bg-white/5 p-6 rounded-3xl border border-white/10 shadow-xl">
-                  <AlignLeft className="w-8 h-8 text-white/20 mt-1 shrink-0" />
+                <div className="flex items-start gap-6 text-zinc-700 dark:text-white/80 bg-zinc-50 dark:bg-white/5 p-6 rounded-3xl border border-zinc-200 dark:border-white/10 shadow-xl">
+                  <AlignLeft className="w-8 h-8 text-zinc-300 dark:text-white/20 mt-1 shrink-0" />
                   <p className="text-lg leading-relaxed whitespace-pre-wrap">{selectedEvent.resource.notes}</p>
                 </div>
               )}
@@ -631,7 +631,7 @@ export default function Calendar() {
               )}
               <button 
                 onClick={() => setSelectedEvent(null)}
-                className="px-12 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-black tracking-widest uppercase text-xs border border-white/30 transition-all"
+                className="px-12 py-4 bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-900 dark:text-white rounded-2xl font-black tracking-widest uppercase text-xs border border-zinc-200 dark:border-white/30 transition-all"
               >
                 FECHAR
               </button>

@@ -177,10 +177,10 @@ export const BiaBrain: React.FC = () => {
     }
 
     try {
-      const apiKey = process.env.GEMINI_API_KEY || (import.meta.env && (import.meta.env as any).VITE_GEMINI_API_KEY);
+      const apiKey = process.env.GEMINI_API_KEY;
       
       if (!apiKey) {
-        console.error('Bia Error: GEMINI_API_KEY is not defined in process.env or import.meta.env');
+        console.error('Bia Error: GEMINI_API_KEY is not defined in process.env');
         await sendWhatsAppMessage(sender_number, "Minha inteligência está desligada (chave API não configurada). Peça ao administrador para verificar.");
         return;
       }
@@ -200,6 +200,38 @@ export const BiaBrain: React.FC = () => {
           data: {
             type: Type.OBJECT,
             description: "The data extracted from the message to perform the action",
+            properties: {
+              name: { type: Type.STRING },
+              phone: { type: Type.STRING },
+              apartment: { type: Type.STRING },
+              unit: { type: Type.STRING },
+              tower: { type: Type.STRING },
+              carrier: { type: Type.STRING },
+              trackingCode: { type: Type.STRING },
+              residentName: { type: Type.STRING },
+              document: { type: Type.STRING },
+              type: { type: Type.STRING },
+              date: { type: Type.STRING },
+              title: { type: Type.STRING },
+              observations: { type: Type.STRING },
+              location: { type: Type.STRING },
+              reportedBy: { type: Type.STRING },
+              amount: { type: Type.NUMBER },
+              description: { type: Type.STRING },
+              category: { type: Type.STRING },
+              topic: { type: Type.STRING },
+              items: { 
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    description: { type: Type.STRING },
+                    quantity: { type: Type.NUMBER },
+                    unitPrice: { type: Type.NUMBER }
+                  }
+                }
+              }
+            }
           },
           reply: {
             type: Type.STRING,
